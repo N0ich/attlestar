@@ -1,10 +1,13 @@
 <?php
 Class SQLdata
 {
+	private $db_name = "mysql:host=127.0.0.1;dbname=rush2";
+	private $db_login = "root";
+	private $db_pass = "abc123";
 
 	public function creatUnivers($data)
 	{
-		$db = new PDO("mysql:host=127.0.0.1;dbname=rush2", "root", "abc123");
+		$db = new PDO($db_name, $db_login, $db_pass);
 		$query = $db->prepare("INSERT INTO game (data) VALUES (?)");
 		$query->execute(array(base64_encode(serialize($data))));
 		return $db->lastInsertId();
@@ -13,7 +16,7 @@ Class SQLdata
 
 	public function getUnivers($id_game)
 	{
-		$db = new PDO("mysql:host=127.0.0.1;dbname=rush2", "root", "abc123");
+		$db = new PDO($db_name, $db_login, $db_pass);
 		$query = $db->prepare("SELECT data FROM game WHERE ? = id");
 		$query->execute(array($id_game));
 		$data = $query->fetch();
@@ -23,7 +26,7 @@ Class SQLdata
 
 	public function setUnivers($id_game, $data)
 	{
-		$db = new PDO("mysql:host=127.0.0.1;dbname=rush2", "root", "abc123");
+		$db = new PDO($db_name, $db_login, $db_pass);
 		$query = $db->prepare("UPDATE game SET data=':data' WHERE :id_game = game.id");
 		$query->execute(array(':data' => serialize($data),
 							':id_game' => $id_game));
@@ -32,7 +35,7 @@ Class SQLdata
 
 	public function getPlayer($id_game)
 	{
-		$db = new PDO("mysql:host=127.0.0.1;dbname=rush2", "root", "abc123");
+		$db = new PDO($db_name, $db_login, $db_pass);
 		$db->prepare("SELECT id, name FROM player game WHERE ? = game.id AND game.id = player.id_game");
 		foreach ($db->exec($id_game) as $value)
 			$data[] = $value;
@@ -40,16 +43,17 @@ Class SQLdata
 		$db->close();
 	}
 
-	public function cleanUnivers($id_game)
+	public function cleanUnivers()
 	{
-		$db = new PDO("mysql:host=127.0.0.1;dbname=rush2", "root", "abc123");
-		$query = $db->prepare("SELECT date FROM game WHERE ? = id");
-		$query->execute(array($id_game));
-		$data = $query->fetch();
-		if ($date + 3600 < time())
-		{
-			$query = $db->prepare("DELETE FROM game WHERE game.id = ?");
-			$query->execute(array($id_game));
+		$db = new PDO($db_name, $db_login, $db_pass);
+		$query = $db->prepare("SELECT id, date_crea FROM game");
+		$query->execute();
+		foreach ($query->fetch() as $value) {
+			if ($value['date_crea'] + 3600 < time())
+			{
+				$query = $db->prepare("DELETE FROM game WHERE ? = game.id");
+				$query->execute(array($idata['id']));
+			}
 		}
 		$db->close();
 	}
