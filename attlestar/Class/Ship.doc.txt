@@ -1,0 +1,47 @@
+Ship ------------------------------------------------------------>
+The ship class is what creates the ships for the fight. It has
+many interactions given by the players and a lot of attributes.
+Each attribute is private but can be reached through getX, and 
+some of them can be modified in order to reflect the ship's
+current status.
+These attributes are :
+HP - Total current HP.
+ppmax - Max pp for each turn.
+turnpp - Remaining pp for current turn.
+played - Flag telling if the ship has played or not.
+weapon - Weapon object (see Class Weapon)
+name - yeah.
+sizex - Size of the ship on the x axis.
+sizey - Size of the ship on the y axis.
+posx - Position of the ship on x axis.
+posy - Position of the ship on y axis.
+move - If the ship is playing and the flag is set to 0, the 
+ship is expected to move.
+fight - If the ship is playing and the flag is set to 0, the 
+ship is expected to fight. Making the ship fight will turn the
+move flag to 1.
+verbose - for debugging purpose, shows when a ship is created or
+destroyed
+
+available methods:
+getName();
+getPP() - returns maxPP;
+getTPP();
+getHP();
+getPosX();
+getPosY();
+getSizeX();
+getSizeY();
+getPlayed();
+getMoved();
+getFighted();
+getSprite();
+getWeapon(); - returns an array containing weapon info
+setPP(); - To modify this turn's PP
+setHP(); modifies current HP
+fight(); - No effect yet, sets the moved attr to 1.
+move(); - checks if moved attr is set to 1.
+startTurn(); fills the currentPP bar;
+endTurn(); sets all the "current turn attributes" to 0.
+
+<------------------------------------------------------------ Ship

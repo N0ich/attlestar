@@ -1,0 +1,46 @@
+body {
+    background-color: black;
+    background-image: linear-gradient(to bottom, #5E5E75 0%, #2F2E36 100%);
+}
+
+table, thead, tbody, th, td, tr {
+    display: block;
+}
+
+#plate {
+    cursor: crosshair;
+    box-shadow: -1px 2px 10px 3px rgba(0, 0, 0, 0.3) inset;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    boder: 2px solid red;
+    top: 100px;
+    width: 1600px;
+    height: 1200px;
+    background-image: url("/ex00/ressource/background/bg-1.jpg");
+}
+
+td {
+
+}
+
+td:hover {
+    background-color: red;
+}
+
+table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    border: 1px solid gray;
+}
+
+/* Hide table headers (but not display: none;, for accessibility) */
+.tile {
+    /* Behave  like a "row" */
+    position: relative;
+    width: 11px;
+    height: 11px;
+    background-color: white;
+    opacity: 0.3;
+    border: 1px solid #000;
+}

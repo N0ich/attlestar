@@ -1,0 +1,13 @@
+Weapon -------------------------------------------------------->
+The weapon class is designed to create the weapons of each
+ships of the fleet. 
+It contains a few privates attributes such as his three ranges,
+its name and sprite, and its damage. All of these attributes
+are necessary in order to create a weapon.
+The functions used to get the values are getLRange(),
+getMRange(), getSRange(), getDamage(), getName(), getSprite().
+For now there aren't any more interactions planned -
+The damage and range will stay the same when a weapon is
+created.
+
+<---------------------------------------------------------Weapon
