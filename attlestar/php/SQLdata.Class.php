@@ -39,5 +39,19 @@ Class SQLdata
 		return $data;
 		$db->close();
 	}
+
+	public function cleanUnivers($id_game)
+	{
+		$db = new PDO("mysql:host=127.0.0.1;dbname=rush2", "root", "abc123");
+		$query = $db->prepare("SELECT date FROM game WHERE ? = id");
+		$query->execute(array($id_game));
+		$data = $query->fetch();
+		if ($date + 3600 < time())
+		{
+			$query = $db->prepare("DELETE FROM game WHERE game.id = ?");
+			$query->execute(array($id_game));
+		}
+		$db->close();
+	}
 }
 ?>
