@@ -1,0 +1,14 @@
+SQLdata ---------------------------------------------------------------------->
+--> public function creatUnivers(Array $player, $data)
+Serialize $data et renvois L'ID de l'enregistrement nouvellement cree.
+Lie la partie au joueurs concerné
+
+--> public function getUnivers($id_game)
+Renvoie les donnees renregistre dans l'enregistrement $id_game unserializé
+
+--> public function setUnivers($id_game, $data)
+Serialize $data et le copie dans l'enregistrement $id_game
+
+--> public function getPlayer($id_game)
+Renvoie une array des players lié a la partie $id_game
+<---------------------------------------------------------------------- SQLdata
