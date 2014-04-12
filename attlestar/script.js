@@ -1,0 +1,34 @@
+function	init_page() {
+	aff_map();
+}
+
+function	aff_map() {
+	map = file("aff_map.php");
+	document.getElementById('map').innerHTML = map;
+}
+
+function	move(x, y) {
+	newmap = file("move.php?x="+ x +"&y=" + y);
+	document.getElementById('map').innerHTML = newmap;
+}
+
+function	highlight(x, y) {
+	newmap = file("highlight.php?x="+ x +"&y=" + y);
+	document.getElementById('map').innerHTML = newmap;
+}
+
+function file(fichier) //Fonction de traitement AJAX
+{
+	if(window.XMLHttpRequest) // FIREFOX
+		xhr_object = new XMLHttpRequest();
+	else if(window.ActiveXObject) // IE
+		xhr_object = new ActiveXObject("Microsoft.XMLHTTP");
+	else
+		return(false);
+	xhr_object.open("GET", fichier, false);
+	xhr_object.send(null);
+	if(xhr_object.readyState == 4)
+		return(xhr_object.responseText);
+	else
+		return(false);
+}

@@ -38,6 +38,7 @@ Class Fleet {
                                 'srange' => 10,
                                 'damage' => 10)),
                             'hp' => 20,
+                            'movement' => 10,
                             'posx' => self::_creatSpawnY($this->_size),
                             'posy' => self::_creatSpawnX($arg['player']),
                             'sizex' => 1,

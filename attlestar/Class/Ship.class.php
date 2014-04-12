@@ -14,6 +14,7 @@ Class Ship implements IElem {
 	private $_turnpp = 0;
 	private $_played = 0;
 	private $_move = 0;
+	private $_movement = 0;
 	private $_fight = 0;
 	private $_hp = 0;
 	private $_weapon = 0;
@@ -26,6 +27,7 @@ Class Ship implements IElem {
         array_key_exists('name', $arg) &&
         array_key_exists('posx', $arg) &&
         array_key_exists('posy', $arg) &&
+        array_key_exists('movement', $arg) &&
         array_key_exists('sizex', $arg) &&
         array_key_exists('sizey', $arg) &&
         array_key_exists('weapon', $arg) &&
@@ -34,6 +36,7 @@ Class Ship implements IElem {
             $this->_ppmax = $arg['pp'];
             $this->_posx = $arg['posx'];
             $this->_posy = $arg['posy'];
+            $this->_movement = $arg['movement'];
             $this->_sizex = $arg['sizex'];
             $this->_sizey = $arg['sizey'];
             $this->_hp = $arg['hp'];
@@ -70,7 +73,9 @@ Class Ship implements IElem {
     }
 
     public function getType() { return ($this->_type); }
+    public function setType($val) { $this->_type = $val; }
     public function getStyle() { return ($this->_style); }
+    public function getMovement() { return ($this->_movement); }
     public function getPosX() { return ($this->_posx); }
     public function setPosX( $posx ) { $this->_posx = $posx; }
     public function getPosY() { return ($this->_posy); }
@@ -81,6 +86,7 @@ Class Ship implements IElem {
 	public function getPP() { return ($this->_ppmax); }
 	public function getTPP() { return ($this->_turnpp); }
 	public function getPlayed() { return ($this->_played); }
+	public function setPlayed() { return ($this->_played); }
 	public function getFighted() { return ($this->_fight); }
 	public function getMoved() { return ($this->_move); }
 	public function getSprite() { return ($this->_sprite); }
