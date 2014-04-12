@@ -7,7 +7,7 @@ Class SQLdata
 
 	public function creatUnivers($data)
 	{
-		$db = new PDO($db_name, $db_login, $db_pass);
+		$db = new PDO("mysql:host=127.0.0.1;dbname=rush2", "root", "abc123");
 		$query = $db->prepare("INSERT INTO game (data) VALUES (?)");
 		$query->execute(array(base64_encode(serialize($data))));
 		return $db->lastInsertId();
@@ -16,7 +16,7 @@ Class SQLdata
 
 	public function getUnivers($id_game)
 	{
-		$db = new PDO($db_name, $db_login, $db_pass);
+		$db = new PDO("mysql:host=127.0.0.1;dbname=rush2", "root", "abc123");
 		$query = $db->prepare("SELECT data FROM game WHERE ? = id");
 		$query->execute(array($id_game));
 		$data = $query->fetch();
@@ -27,7 +27,7 @@ Class SQLdata
 	public function setUnivers($id_game, $data)
 	{
 		$db = new PDO("mysql:host=127.0.0.1;dbname=rush2", "root", "abc123");
-		$query = $db->prepare("UPDATE game SET data=:data WHERE id = :id_game");
+		$query = $db->prepare("UPDATE game SET data=:data WHERE id =:id_game");
 		$query->execute(array(
 							'data' => base64_encode(serialize($data)),
 							'id_game' => $id_game
@@ -36,7 +36,7 @@ Class SQLdata
 
 	public function getPlayer($id_game)
 	{
-		$db = new PDO($db_name, $db_login, $db_pass);
+		$db = new PDO("mysql:host=127.0.0.1;dbname=rush2", "root", "abc123");
 		$db->prepare("SELECT id, name FROM player game WHERE ? = game.id AND game.id = player.id_game");
 		foreach ($db->exec($id_game) as $value)
 			$data[] = $value;
@@ -46,7 +46,7 @@ Class SQLdata
 
 	public function cleanUnivers()
 	{
-		$db = new PDO($db_name, $db_login, $db_pass);
+		$db = new PDO("mysql:host=127.0.0.1;dbname=rush2", "root", "abc123");
 		$query = $db->prepare("SELECT id, date_crea FROM game");
 		$query->execute();
 		foreach ($query->fetch() as $value) {
