@@ -1,0 +1,188 @@
+@import url("nav.css");
+@import url("compiled.css");
+@import url("icomoon.css");
+
+* {
+	box-sizing: border-box;
+	outline: none;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+html {
+	width: 100%;
+	font-family: 'Open Sans', sans-serif;
+	background-color: #002b36;
+	color:#839496;
+}
+
+body {
+	width: 80%;
+	margin: 0 auto;
+	background-color: #073642;
+}
+
+footer {
+	position: absolute;
+	width: 100%;
+	margin: 0 auto;
+	padding: 10px;
+	font-size: 10px;
+	bottom:0;
+}
+
+input {
+	border-radius: 5px / 5px;
+	-webkit-border-radius: 5px / 5px;
+	-moz-border-radius: 5px / 5px;
+	padding: 1em;
+	width: 100%;
+	border: 2px solid rgba(0,0,0,.1);
+	background: rgba(101, 123, 131, 0.3);
+}
+
+input[type="submit"], select {
+	cursor: pointer;
+}
+
+input[type="checkbox"] {
+	cursor: pointer;
+	width: 10px;
+}
+
+select {
+	border: 0 !important;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	padding: 10px;
+	color: #fdf6e3;
+	background: #002b36 url(arrow.png) no-repeat 90% center;
+	width: 100px;
+	text-indent: 0.01px;
+	text-overflow: "";
+	-webkit-border-radius: 0 0 0 0;
+	border-radius: 0 0 0 0;
+}
+
+li {
+	list-style: none;
+}
+
+.blue {
+	color: #268bd2;
+}
+
+.hide {
+	display: none;
+}
+
+.noborder {
+	border: 0 !important;
+}
+
+.force {
+	display: block !important;
+}
+
+.wrapper {
+	position: relative;
+	min-height: 100%;
+}
+
+.login {
+	width: 20%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.label-panier {
+	margin-left: 10px;
+	padding: 3px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background: #dc322f;
+	color: #fdf6e3;
+}
+
+.alert {
+	margin: 20px;
+	padding: 10px;
+	border-left: 3px solid #eee;
+}
+
+.alert.success {
+	background-color: rgba(0, 153, 18, 0.1);
+	border-color: #009912;
+}
+
+.alert.error {
+	background-color: rgba(179, 0, 0, 0.1);
+	border-color: #A00006;
+}
+
+.alert.info {
+	background-color: rgba(179, 150, 0, 0.1);
+	border-color: #B4B400;
+}
+
+::-webkit-input-placeholder {
+	color: #fdf6e3;;
+}
+
+:-moz-placeholder {
+	color: #fdf6e3;;
+}
+
+::-moz-placeholder {
+	color: #fdf6e3;;
+}
+
+:-ms-input-placeholder {
+	color: #fdf6e3;;
+}
+
+#chat {
+	background-color: #05242B;
+	height: 500px;
+	width: 1000px;
+	box-shadow: 0 0 10px #15434F, inset 0 0 3px #04191F;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	text-align: left;
+}
+
+#message {
+	height: 20px;
+	width: 1000px;
+	border: 0;
+	box-shadow: 0 0px 10px #39626B, inset 0 -2px 5px #FCFCFC;
+}
+
+#chat .hour {
+	color: #5B6E70;
+	margin-right: 5px;
+}
+
+#chat .msg {
+	color: #5B6E70;
+}
+
+::-webkit-scrollbar {
+	width: 15px;
+	height: 15px;
+}
+::-webkit-scrollbar-track-piece  {
+	background-color: gray;
+}
+::-webkit-scrollbar-thumb:vertical {
+	height: 30px;
+	background-color: #0A4C95;
+}
+::-webkit-scrollbar-thumb:horizontal {
+	height: 0px;
+	background-color: #0A4C95;
+}
