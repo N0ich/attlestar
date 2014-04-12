@@ -57,21 +57,18 @@ Class Map {
 			array_push($this->_elems, $elem);
 			$this->setCoord($elem);
 		}
+        else  {
+            foreach ($elem->getElems() as $ship)
+                $this->addElem($ship);
+        }
 	}
 
 	public function setCoord($elem) {
-		$pos = $elem->getPos();
-		$size = $elem->getSize();
-		if (Map::$verbose)
-			{
-				print_r($size);
-				print_r($pos);
-			}
 		if (is_subclass_of($elem, 'IElem')) {
-			for ($x = 0; $x <= $size['x']; ++$x) {
-				for ($y = 0; $y <= $size['y']; ++$y) {
-					if ($pos['x'] >= 0 and $pos['x'] < $this->_size_x and $pos['y'] >= 0 and $pos['y'] < $this->_size_x) {
-						$this->_plate[$pos['x'] + $x][$pos['y'] + $y] = $elem;
+			for ($x = 0; $x <= $elem->getSizeX(); ++$x) {
+				for ($y = 0; $y <= $elem->getSizeY(); ++$y) {
+					if ($elem->getPosX() >= 0 and $elem->getPosX() < $this->_size_x and $elem->getPosY() >= 0 and $elem->getPosY() < $this->_size_x) {
+						$this->_plate[$elem->getPosX() + $x][$elem->getPosY() + $y] = $elem;
 					}
 				}
 			}
