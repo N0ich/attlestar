@@ -62,10 +62,10 @@ Class Map {
 			array_push($this->_elems, $elem);
 			$this->setCoord($elem);
 		}
-        else  {
-            foreach ($elem->getElems() as $ship)
-                $this->addElem($ship);
-        }
+		else  {
+			foreach ($elem->getElems() as $ship)
+				$this->addElem($ship);
+		}
 	}
 
 	public function setCoord($elem) {
