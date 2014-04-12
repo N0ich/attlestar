@@ -29,7 +29,7 @@ $game->getMap()->addElem($fleet1);
 $game->getMap()->addElem($fleet2);
 $test = New SQLData;
 $id = $test->creatUnivers($game);
-$game = $test->getUnivers($game);
+$game = $test->getUnivers($id);
 $game->refresh();
 
 include 'php/footer.php';
