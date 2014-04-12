@@ -12,15 +12,15 @@ Class Fleet {
 	private $_elems = array();
 	static $verbose = FALSE;
 
-	private function _creatSpawnX($p) {
+	private function _creatSpawnY($p) {
 		return (($this->_size * 5) + 10);
 	}
 
-	private function _creatSpawnY($p) {
+	private function _creatSpawnX($p) {
 		if ($p == 2)
-			return (120);
+			return (99);
 		else
-			return (20);
+			return (5);
 	}
 
 	function __construct(array $arg) {
@@ -38,10 +38,10 @@ Class Fleet {
                                 'srange' => 10,
                                 'damage' => 10)),
                             'hp' => 20,
-                            'posx' => self::_creatSpawnX($this->_size),
-                            'posy' => self::_creatSpawnY($arg['player']),
-                            'sizex' => 4,
-                            'sizey' => 1
+                            'posx' => self::_creatSpawnY($this->_size),
+                            'posy' => self::_creatSpawnX($arg['player']),
+                            'sizex' => 1,
+                            'sizey' => 4
                             )));
                         $this->_size++;
                     }
@@ -49,7 +49,7 @@ Class Fleet {
 		else
 			return (NULL);
 		if (self::$verbose == TRUE)
-			echo "Player now has a ".$this->_size." ships fleet\n";
+			echo "Player ".$this->_player." now has a ".$this->_size." ships fleet\n";
 	}
 
 	function __destruct() {

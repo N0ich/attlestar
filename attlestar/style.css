@@ -1,0 +1,56 @@
+body {
+	font-family: helvetica;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+tr {
+}
+
+td {
+	border: 1px solid black;
+	width: 8px;
+	height: 10px;
+}
+
+.Player1 {
+	text-align: center;
+	border: 1px solid black;
+	background-color: lightgrey;
+	float: left;
+	width: 200px;
+}
+
+.shipcase {
+	background-color: black;
+}
+
+.battleground {
+	float: left;
+	background-color: grey;
+}
+
+.Player2 {
+	background-color: lightgrey;
+	text-align: center;
+	border: 1px solid black;
+	float: left;
+	width: 200px;
+}
+
+.ship-img {
+	height: 45px;
+	width: 90px;
+}
+
+.hpbar {
+	height: 15px;
+	width: 5px;
+}
+
+.ppbar {
+	height: 5px;
+	width: 5px;
+}
