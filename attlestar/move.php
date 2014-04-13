@@ -20,6 +20,6 @@ $ship->setPosY($y);
 $game->getMap()->addElem($ship);
 $sql->setUnivers($id, $game);
 $_SESSION['ship'] = serialize($ship);
-echo $game->refresh();
+echo $game->refreshFire();
 
 ?>

@@ -16,6 +16,6 @@ $y = $_GET['y'];
 $ret = $game->getMap()->getPlate()[$x][$y];
 $game->getMap()->unsetCoord($ret);
 $sql->setUnivers($id, $game);
-echo $game->refresh();
+echo $game->refreshInactive();
 
 ?>

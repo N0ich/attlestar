@@ -21,6 +21,6 @@ if ($ret)
 	$game->getMap()->addElem($hl);
 	$game->getMap()->addElem($ret);
 }
-echo $game->refresh();
+echo $game->refreshMove();
 
 ?>

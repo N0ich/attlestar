@@ -15,6 +15,6 @@ $ship = unserialize($_SESSION['ship']);
 $hl = new Highlight($ship, "fire");
 $game->getMap()->addElem($hl);
 $game->getMap()->addElem($ship);
-echo $game->refresh();
+echo $game->refreshFire();
 
 ?>

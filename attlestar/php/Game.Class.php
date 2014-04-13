@@ -24,6 +24,24 @@ Class Game {
 		echo '</div>';
 	}
 
+	public function refreshMove() {
+		echo '<div id="plate">';
+		$this->getMap()->printMove();
+		echo '</div>';
+	}
+
+	public function refreshInactive() {
+		echo '<div id="plate">';
+		$this->getMap()->printInactive();
+		echo '</div>';
+	}
+
+	public function refreshFire() {
+		echo '<div id="plate">';
+		$this->getMap()->printFire();
+		echo '</div>';
+	}
+
 	public function getMap() { return ($this->_map); }
 	public function setMap( $map ) { $this->_map = $map; }
 

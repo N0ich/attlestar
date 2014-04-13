@@ -42,13 +42,85 @@ Class Map {
 					print(' title="space" ' );
 				else {
 					print($tile->getStyle());
-					if ($tile->getStyle() == " style =\"background-color: white; opacity: 0.95; border: 1px inset #424242;\" title=\"highlight\"")
-						echo "onclick='move(\"".$x."\",\"".$y."\")'";
-					else if ($tile->getStyle() == " style =\"background-color: pink; opacity: 0.95; border: 1px inset #424242;\" title=\"fire\"")
-						echo "onclick='damage(\"".$x."\",\"".$y."\")'";
-					else if ($tile->getStyle() != " style =\"background-color: #424242; opacity: 0.95; border: 1px inset #424242; border-radius: 20%;\" title=\"asteroide\"")
+					if ($tile->getStyle() != " style =\"background-color: #424242; opacity: 0.95; border: 1px inset #424242; border-radius: 20%;\" title=\"asteroide\"")
 						echo "onclick='highlight(\"".$x."\",\"".$y."\")'";
 			}
+				print('></td>' . PHP_EOL);
+				++$y;
+			}
+			++$x;
+			print( "</tr>" . PHP_EOL);
+		}
+		print( '</tbody>' . PHP_EOL );
+		print( "</table>" . PHP_EOL );
+	}
+
+	public function printInactive() {
+		print('<table summary = "map">' . PHP_EOL);
+		print('<tbody>' . PHP_EOL );
+		$x = 0;
+		foreach ($this->getPlate() as $line) {
+			$y = 0;
+			print("<tr>" . PHP_EOL );
+			foreach ($line as $tile) {
+				print('<td id="' . $x . "x" . $y . '"  class="tile" ');
+				if ($tile == null)
+					print(' title="space" ' );
+				else {
+					print($tile->getStyle());
+				}
+				print('></td>' . PHP_EOL);
+				++$y;
+			}
+			++$x;
+			print( "</tr>" . PHP_EOL);
+		}
+		print( '</tbody>' . PHP_EOL );
+		print( "</table>" . PHP_EOL );
+	}
+
+	public function printMove() {
+		print('<table summary = "map">' . PHP_EOL);
+		print('<tbody>' . PHP_EOL );
+		$x = 0;
+		foreach ($this->getPlate() as $line) {
+			$y = 0;
+			print("<tr>" . PHP_EOL );
+			foreach ($line as $tile) {
+				print('<td id="' . $x . "x" . $y . '"  class="tile" ');
+				if ($tile == null)
+					print(' title="space" ' );
+				else {
+					print($tile->getStyle());
+					if ($tile->getStyle() == " style =\"background-color: white; opacity: 0.95; border: 1px inset #424242;\" title=\"highlight\"")
+						echo "onclick='move(\"".$x."\",\"".$y."\")'";
+				}
+				print('></td>' . PHP_EOL);
+				++$y;
+			}
+			++$x;
+			print( "</tr>" . PHP_EOL);
+		}
+		print( '</tbody>' . PHP_EOL );
+		print( "</table>" . PHP_EOL );
+	}
+
+	public function printFire() {
+		print('<table summary = "map">' . PHP_EOL);
+		print('<tbody>' . PHP_EOL );
+		$x = 0;
+		foreach ($this->getPlate() as $line) {
+			$y = 0;
+			print("<tr>" . PHP_EOL );
+			foreach ($line as $tile) {
+				print('<td id="' . $x . "x" . $y . '"  class="tile" ');
+				if ($tile == null)
+					print(' title="space" ' );
+				else {
+					print($tile->getStyle());
+					if ($tile->getStyle() == " style =\"background-color: pink; opacity: 0.95; border: 1px inset #424242;\" title=\"fire\"")
+						echo "onclick='damage(\"".$x."\",\"".$y."\")'";
+				}
 				print('></td>' . PHP_EOL);
 				++$y;
 			}
