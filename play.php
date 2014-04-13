@@ -1,6 +1,5 @@
 <?php
 	include('includes/header.php');
-	include('includes/play.php');
 ?>
 <div class="content">
 	<h1>Jouer!</h1>

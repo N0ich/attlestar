@@ -25,7 +25,6 @@ $game->getMap()->addElem($fleet1);
 $game->getMap()->addElem($fleet2);
 $sql = New SQLData;
 $id = $sql->creatUnivers($game);
-echo "lol";
 $_SESSION['id_game'] = $id;
 $_SESSION['sql'] = $sql;
 header("Location: game.php");

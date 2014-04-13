@@ -17,7 +17,10 @@
 		else
 			echo "<h3 style='color: red'>Offline</h3>";
 		echo "<h4>Ratio de victoire</h4>";
-		$ratio = intval(($data['pwon'] / ($data['pwon'] + $data['ploose']) * 100), 100);
+		if ($data['pwon'] + $data['ploose'])
+			$ratio = intval(($data['pwon'] / ($data['pwon'] + $data['ploose']) * 100), 100);
+		else
+			$ratio = 0;
 		echo $ratio."% ";
 		if ($ratio < 10) {
 			echo "<i class='icon-neutral'></i>";

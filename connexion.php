@@ -4,7 +4,7 @@
 	include('includes/auth.php');
 ?>
 <?php
-	if ($_POST['login'] && $_POST['password']) {
+	if (isset($_POST['login']) && isset($_POST['password'])) {
 		if (auth($_POST['login'], $_POST['password']) == true) {
 			header('Location:index.php?justlogged');
 		} else {

@@ -24,12 +24,17 @@
 		} else {
 			$image = "icon-thumbs-up";
 		}
+		if ($data['pwon'] + $data['ploose']) {
+			$ratio = intval(($data['pwon'] / ($data['pwon'] + $data['ploose']) * 100), 100);
+		} else {
+			$ratio = 0;
+		}
 		echo "<tr>
 			<td>$i <i class='".$image."'></i></td>
 			<td><a href='profile.php?id=".$data['id']."'>".$data['login']."</a></td>
 			<td style='color: green;'>".$data['pwon']."</td>
 			<td style='color: red'>".$data['ploose']."</td>
-			<td>".intval(($data['pwon'] / ($data['pwon'] + $data['ploose']) * 100), 100)."%</td>
+			<td>".$ratio."%</td>
 			</tr>";
 		$i++;
 }

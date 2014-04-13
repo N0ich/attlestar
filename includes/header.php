@@ -20,7 +20,7 @@
 					<li><a href="index.php"><i class="icon-home2"></i>Home</a></li>
 					<li><a href="ladder.php"><i class="icon-trophy"></i>Ladder</a></li>
 					<?php
-						if (!$_SESSION['id']) { ?>
+						if (!isset($_SESSION['id'])) { ?>
 							<li><a href="inscription.php"><i class="icon-rocket"></i>Inscription</a></li>
 							<li><a href="connexion.php"><i class="icon-key"></i>Connexion</a></li>
 						<?php } else { ?>
