@@ -210,3 +210,20 @@ button {
 button:hover {
 	background-color: #0A748F;
 }
+
+.profile {
+	height: 200px;
+	width: 200px;
+	float: left;
+	margin-right: 50px;
+}
+
+.logo {
+	font-family: 'Sniglet', cursive;
+	font-size: 60px;
+	text-align: center;
+}
+
+.subtitle {
+	font-size: 12px;
+}

@@ -11,12 +11,15 @@
 	));
 	$data = $query->fetch();
 	if ($data) {
+		if (isset($data['img'])) {
+			echo "<img class='profile' src='http://www.webdesignerforum.co.uk/uploads/profile/photo-1407.jpg?_r=1396701824'>";
+		}
 		echo "<h1>".$data['login']."</h1>";
 		if ($data['online'])
 			echo "<h3 style='color: green;'>Online</h3>";
 		else
 			echo "<h3 style='color: red'>Offline</h3>";
-		echo "<h4>Ratio de victoire</h4>";
+		echo "<h4>Ratio de victoire: </h4>";
 		if ($data['pwon'] + $data['ploose'])
 			$ratio = intval(($data['pwon'] / ($data['pwon'] + $data['ploose']) * 100), 100);
 		else
@@ -33,6 +36,9 @@
 		} else {
 			echo "<i class='icon-evil'></i>";
 		}
+		echo "<br /><br />Nombre de partie jouees: ".($data['pwon'] + $data['ploose'])."<br />";
+		echo "Nombre de partie gagnees: <span style='color: green'>".$data['pwon']."</span><br />";
+		echo "Nombre de partie perdues: <span style='color: red'>".$data['ploose']."</span><br />";
 	} else {
 		echo "<h1>Profile not found :(</h1>";
 	}

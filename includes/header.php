@@ -8,13 +8,15 @@
 		<link rel="stylesheet" type="text/css" href="style/compiled.css">
 		<link rel="stylesheet" type="text/css" href="style/icomoon.css">
 		<link rel="stylesheet" type="text/css" href="style/nav.css">
-
+		<link href='http://fonts.googleapis.com/css?family=Sniglet' rel='stylesheet' type='text/css'>
 		<script src="scripts/script.js"></script>
 	</head>
 	<body>
 		<div class="wrapper">
 		<header>
 			<!-- Menu -->
+			<center><span class='logo'><i class='icon-road'></i>ttleStar</span><br />
+			<span class='subtitle'>Parce que le 'B', c'est pour les faibles.</span></center>
 			<nav class="menu">
 				<ul>
 					<li><a href="index.php"><i class="icon-home2"></i>Home</a></li>
