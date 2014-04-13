@@ -41,19 +41,14 @@ Class SQLdata
 
 	}
 
-	public function cleanUnivers()
+	public function destroyUnivers($id_game)
 	{
 		$db = connect();
-		$query = $db->prepare("DELETE FROM game WHERE (date_crea + 3600) < CURRENT_TIME");
-		$query->execute();
-		foreach ($query->fetch() as $value) {
-			if ($value['date_crea'] + 3600 < time())
-			{
-				$query = $db->prepare("DELETE FROM game WHERE ? = game.id");
-				$query->execute(array($idata['id']));
-			}
-		}
-		$db->close();
+		$query = $db->prepare("DROP TABLE chat?");
+		$query->execute($id_game);
+		$query = $db->prepare("DELETE FROM game WHERE ? = id");
+		$query->execute($id_game);
 	}
+
 }
 ?>
