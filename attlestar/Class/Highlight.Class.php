@@ -20,14 +20,22 @@ Class Highlight implements IElem {
 				$this->_sizex = 1;
 			}
 			if ($orientation == 3)
+			{			
 				$this->_posy -= 20;
+				if ($this->_posy < 0)
+					$this->_posy = 0;
+			}
 			if ($orientation == 2 || $orientation == 4)
 			{
 				$this->_sizex = 20;
 				$this->_sizey = 1;
 			}
-			if ($orientation == 4)
+			if ($orientation == 2)
+			{
 				$this->_posx -= 20;
+				if ($this->_posx < 0)
+					$this->_posx = 0;
+			}
 			$this->_type = 'highlight';
 			$this->_style = new Style (array('opacity' => 0.95,
 											 'border' => '1px inset #424242',
@@ -49,14 +57,22 @@ Class Highlight implements IElem {
 				$this->_sizex = 1;
 			}
 			if ($orientation == 3)
+			{
 				$this->_posy -= 30;
+				if ($this->_posy < 0)
+					$this->_posy = 0;
+			}
 			if ($orientation == 2 || $orientation == 4)
 			{
 				$this->_sizex = 30;
 				$this->_sizey = 1;
 			}
-			if ($orientation == 4)
+			if ($orientation == 2)
+			{
 				$this->_posx -= 30;
+				if ($this->_posx < 0)
+					$this->_posx = 0;
+			}
 		}
 		else if ($status == "rotate")
 		{
@@ -71,12 +87,16 @@ Class Highlight implements IElem {
 				$this->_sizex = 5;
 				$this->_posx -= 2;
 				$this->_sizey = 1;
+				if ($this->_posx < 0)
+					$this->posx = 0;
 			}
 			if ($orientation == 2 || $orientation == 4)
 			{
 				$this->_sizey = 5;
 				$this->_sizex = 1;
 				$this->_posy -= 2;
+				if ($this->_posy < 0)
+					$this->posy = 0;
 			}
 		}
 	}
