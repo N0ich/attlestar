@@ -19,4 +19,8 @@ require_once 'php/Obstacle.Class.php';
 	if ($player == $_SESSION['id'])
 		echo "<button onclick='endofturn()'>Finir mon Tour</button><br />";
 	echo "<button onclick='leave()'>Quitter la partie</button>";
+/*	$class = new SQLdata();
+	$game = $class->getUnivers($_SESSION['id_game']);
+	$tab = $game->getMap()->getElem()->getShip();
+	print_r($tab);*/
 ?>

@@ -6,5 +6,5 @@
 	if (count(explode(',', $query[$_GET['player']."player"])) == $_GET['player'])
 		echo "ok";
 	else
-		echo "Veuillez patienter, ".(count(explode(',', $query[$_GET['player']."player"])) - 1)." joueurs trouves...";
+		echo "<center><img src='php/img.gif'><br />Veuillez patienter, ".(count(explode(',', $query[$_GET['player']."player"])) - 1)." joueurs trouves...</center>";
 ?>

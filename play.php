@@ -12,3 +12,5 @@
 	<input type="submit" value="Chercher des adversaires!" onclick="lobby()">
 	<div id="wait_players"></div>
 </div>
+
+<?php include('includes/footer.php'); ?>
