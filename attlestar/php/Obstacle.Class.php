@@ -16,10 +16,10 @@ class Obstacle implements IElem {
 
 	public function __construct(array $kwargs) {
 		if (array_key_exists('name', $kwargs) and
-		array_key_exists('posx', $kwargs) and
-		array_key_exists('posy', $kwargs) and
-		array_key_exists('sizex', $kwargs) and
-		array_key_exists('sizey', $kwargs))
+			array_key_exists('posx', $kwargs) and
+			array_key_exists('posy', $kwargs) and
+			array_key_exists('sizex', $kwargs) and
+			array_key_exists('sizey', $kwargs))
 			{
 				$this->setName($kwargs['name']);
 				$this->_posx = $kwargs['posx'];

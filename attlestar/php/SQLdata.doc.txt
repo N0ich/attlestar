@@ -1,17 +1,16 @@
 SQLdata ---------------------------------------------------------------------->
---> public function creatUnivers(Array $player, $data)
-Serialize $data et renvois L'ID de l'enregistrement nouvellement cree.
-Lie la partie au joueurs concerné
+--> public function creatUnivers($data)
+Serialize $data and references the ID of the newly created record.
 
 --> public function getUnivers($id_game)
-Renvoie les donnees renregistre dans l'enregistrement $id_game unserializé
+Returns the data stored in the recording $id_game unserialized
 
 --> public function setUnivers($id_game, $data)
-Serialize $data et le copie dans l'enregistrement $id_game
+Serialize $data and copies it to the recording $id_game
 
 --> public function getPlayer($id_game)
-Renvoie une array des players lié a la partie $id_game
+Returns an array of players linked to the party $id_game
 
---> public function cleanUnivers()
-Supprime toute partie inactive depuis plus d'une heur.
+--> public function destroyUnivers($id_game)
+Destroys the universe! (not just made ​​a binding game $id_game)
 <---------------------------------------------------------------------- SQLdata

@@ -1,0 +1,11 @@
+Obstacle --------------------------------------------------------------------->
+--> public function __construct(array $kwargs)
+$kwargs, expected Array('name', 'posx', 'posy', 'sizex', 'sizey')
+name, string
+posx, int
+posy, int
+sizex, int
+sizey, int
+
+creat an obstracle
+<--------------------------------------------------------------------- Obstacle
