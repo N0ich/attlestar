@@ -11,7 +11,7 @@
 	));
 	$data = $query->fetch();
 	if ($data) {
-		if (!($data['img'])) {
+		if (!isset($data['img'])) {
 			echo "<img class='profile' src='http://www.webdesignerforum.co.uk/uploads/profile/photo-1407.jpg?_r=1396701824'>";
 		} else {
 			echo "<img class='profile' src='".$data['img']."'>";
