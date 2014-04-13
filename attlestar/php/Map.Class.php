@@ -43,7 +43,7 @@ Class Map {
 				else {
 					print($tile->getStyle());
 					if ($tile->getStyle() != " style =\"background-color: #424242; opacity: 0.95; border: 1px inset #424242; border-radius: 20%;\" title=\"asteroide\"")
-						echo "onclick='highlight(\"".$x."\",\"".$y."\")'";
+						echo " onclick='highlight(\"".$x."\",\"".$y."\")'";
 			}
 				print('></td>' . PHP_EOL);
 				++$y;
@@ -92,7 +92,7 @@ Class Map {
 					print(' title="space" ' );
 				else {
 					print($tile->getStyle());
-					if ($tile->getStyle() == " style =\"background-color: white; opacity: 0.95; border: 1px inset #424242;\" title=\"highlight\"")
+					if ($tile->getStyle() == " style =\"background-color: #D9D0D0; opacity: 0.95; border: 1px inset #424242;\" title=\"highlight\"")
 						echo "onclick='move(\"".$x."\",\"".$y."\")'";
 				}
 				print('></td>' . PHP_EOL);
@@ -118,7 +118,7 @@ Class Map {
 					print(' title="space" ' );
 				else {
 					print($tile->getStyle());
-					if ($tile->getStyle() == " style =\"background-color: pink; opacity: 0.95; border: 1px inset #424242;\" title=\"fire\"")
+					if ($tile->getStyle() == " style =\"background-color: #D17C21; opacity: 0.95; border: 1px inset #424242;\" title=\"fire\"")
 						echo "onclick='damage(\"".$x."\",\"".$y."\")'";
 				}
 				print('></td>' . PHP_EOL);

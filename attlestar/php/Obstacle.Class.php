@@ -29,7 +29,7 @@ class Obstacle implements IElem {
 				$this->setType('obstacle');
 			}
 		if (!array_key_exists('style', $kwargs))
-			$this->setStyle(new Style(array( 'color' => 'brown', 'opacity' => 0.7, 'name' => 'obstacle') ) );
+			$this->setStyle(new Style(array( 'color' => '#2B2626', 'opacity' => 0.7, 'name' => 'obstacle') ) );
 		else
 			$this->setStyle($kwargs['style']);
 	}

@@ -19,7 +19,7 @@ Class Highlight implements IElem {
 			$this->_type = 'highlight';
 			$this->_style = new Style (array('opacity' => 0.95,
 											 'border' => '1px inset #424242',
-											 'color' => 'white',
+											 'color' => '#D9D0D0',
 											 'name' => 'highlight'
 										   ));
 		}
@@ -28,7 +28,7 @@ Class Highlight implements IElem {
 			$this->_type = 'fire';
 			$this->_style = new Style (array('opacity' => 0.95,
 											 'border' => '1px inset #424242',
-											 'color' => 'pink',
+											 'color' => '#D17C21',
 											 'name' => 'fire'
 										   ));
 			$this->_sizey = 30;

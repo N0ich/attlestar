@@ -63,10 +63,10 @@ Class Ship implements IElem {
     public function getTeam() { return ($this->_team); }
     public function setTeam(Fleet $team ) {
         $style = array ('opacity' => 0.95, 'border' => '1px inset #424242');
-        if ($team->getPlayer() == 1){ $style['color'] = 'red'; $style['name'] = 'Team 1';}
-        if ($team->getPlayer() == 2){ $style['color'] = 'blue'; $style['name'] = 'Team 2';}
-        if ($team->getPlayer() == 3){ $style['color'] = 'green'; $style['name'] = 'Team 3';}
-        if ($team->getPlayer() == 4){ $style['color'] = 'yellow'; $style['name'] = 'Team 4';}
+        if ($team->getPlayer() == 1){ $style['color'] = '#A61B1D'; $style['name'] = 'Team 1';}
+        if ($team->getPlayer() == 2){ $style['color'] = '#313A99'; $style['name'] = 'Team 2';}
+        if ($team->getPlayer() == 3){ $style['color'] = '#17912E'; $style['name'] = 'Team 3';}
+        if ($team->getPlayer() == 4){ $style['color'] = '#E3CD24'; $style['name'] = 'Team 4';}
         $this->_style = new Style($style);
         $this->_team = $team;
 

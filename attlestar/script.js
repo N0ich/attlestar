@@ -44,7 +44,7 @@ function	endofturn() {
 	player = file('player.php');
 	document.getElementById('alert').innerHTML = player;
 	aff_map();
-	setTimeout('endofturn()', 5000);
+	setTimeout('endofturn()', 20000);
 }
 
 function	leave() {
