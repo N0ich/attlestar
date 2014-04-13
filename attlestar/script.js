@@ -10,8 +10,18 @@ function	aff_map() {
 function	move(x, y) {
 	newmap = file("move.php?x="+ x +"&y=" + y);
 	document.getElementById('map').innerHTML = newmap;
+	fire();
 }
 
+function	fire() {
+	newmap = file("fire.php");
+	document.getElementById('map').innerHTML = newmap;
+}
+
+function	damage(x, y) {
+	newmap = file("damage.php?x="+ x +"&y=" + y);
+	document.getElementById('map').innerHTML = newmap;
+}
 function	highlight(x, y) {
 	newmap = file("highlight.php?x="+ x +"&y=" + y);
 	document.getElementById('map').innerHTML = newmap;

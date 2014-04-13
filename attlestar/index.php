@@ -24,20 +24,11 @@ $fleet2 = new Fleet(array('size' => 5, 'player' => 2));
 
 $game->getMap()->addElem($fleet1);
 $game->getMap()->addElem($fleet2);
-<<<<<<< HEAD
 $sql = New SQLData;
 $id = $sql->creatUnivers($game);
 $_SESSION['id'] = $id;
 $_SESSION['sql'] = $sql;
 header("Location: game.php");
-=======
-$test = New SQLData;
-$test->cleanUnivers();
-$id = $test->creatUnivers($game);
-$game = $test->getUnivers($id);
-$game->refresh();
-
->>>>>>> 4b880a7d910a59c038cb1f3ef35f34db1929b6dd
 include 'php/footer.php';
 
 ?>

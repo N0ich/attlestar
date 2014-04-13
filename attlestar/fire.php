@@ -11,16 +11,10 @@ require_once 'php/Obstacle.Class.php';
 $id = $_SESSION['id'];
 $sql = New SQLdata;
 $game = $sql->getUnivers($id);
-$x = $_GET['x'];
-$y = $_GET['y'];
-$ret = $game->getMap()->getPlate()[$x][$y];
-$_SESSION['ship'] = serialize($ret);
-if ($ret)
-{
-	$hl = new Highlight($ret, "move");
-	$game->getMap()->addElem($hl);
-	$game->getMap()->addElem($ret);
-}
+$ship = unserialize($_SESSION['ship']);
+$hl = new Highlight($ship, "fire");
+$game->getMap()->addElem($hl);
+$game->getMap()->addElem($ship);
 echo $game->refresh();
 
 ?>

@@ -14,10 +14,12 @@ $sql = New SQLdata;
 $game = $sql->getUnivers($id);
 $x = $_GET['x'];
 $y = $_GET['y'];
+$game->getMap()->unsetCoord($ship);
 $ship->setPosX($x);
 $ship->setPosY($y);
 $game->getMap()->addElem($ship);
 $sql->setUnivers($id, $game);
+$_SESSION['ship'] = serialize($ship);
 echo $game->refresh();
 
 ?>

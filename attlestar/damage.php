@@ -14,13 +14,8 @@ $game = $sql->getUnivers($id);
 $x = $_GET['x'];
 $y = $_GET['y'];
 $ret = $game->getMap()->getPlate()[$x][$y];
-$_SESSION['ship'] = serialize($ret);
-if ($ret)
-{
-	$hl = new Highlight($ret, "move");
-	$game->getMap()->addElem($hl);
-	$game->getMap()->addElem($ret);
-}
+$game->getMap()->unsetCoord($ret);
+$sql->setUnivers($id, $game);
 echo $game->refresh();
 
 ?>

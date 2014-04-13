@@ -9,18 +9,30 @@ Class Highlight implements IElem {
 	private $_mv;
 	private $_style;
 
-	public function __construct($ship) {
-		$this->_type = 'highlight';
+	public function __construct($ship, $status) {
 		$this->_posx = $ship->getPosX();
 		$this->_posy = $ship->getPosY();
-		$this->_sizex = $ship->getSizeX();
-		$this->_sizey = 20;
-		$this->_range = $ship->getWeapon()['lrange'];
-		$this->_style = new Style (array('opacity' => 0.95,
-										 'border' => '1px inset #424242',
-										 'color' => 'white',
-										 'name' => 'highlight'
-									   ));
+		$this->_sizex = 1;
+		if ($status == "move")
+		{
+			$this->_sizey = 20;
+			$this->_type = 'highlight';
+			$this->_style = new Style (array('opacity' => 0.95,
+											 'border' => '1px inset #424242',
+											 'color' => 'white',
+											 'name' => 'highlight'
+										   ));
+		}
+		else
+		{
+			$this->_type = 'fire';
+			$this->_style = new Style (array('opacity' => 0.95,
+											 'border' => '1px inset #424242',
+											 'color' => 'pink',
+											 'name' => 'fire'
+										   ));
+			$this->_sizey = 30;
+		}
 	}
 
 	public function getType() { return ($this->_type); }
