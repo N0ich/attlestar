@@ -11,4 +11,7 @@ Serialize $data et le copie dans l'enregistrement $id_game
 
 --> public function getPlayer($id_game)
 Renvoie une array des players lié a la partie $id_game
+
+--> public function cleanUnivers()
+Supprime toute partie inactive depuis plus d'une heur.
 <---------------------------------------------------------------------- SQLdata

@@ -8,7 +8,7 @@ Class SQLdata
 		$query = $db->prepare("INSERT INTO game (data) VALUES (?)");
 		$query->execute(array(base64_encode(serialize($data))));
 		return $db->lastInsertId();
-		
+
 	}
 
 	public function getUnivers($id_game)
@@ -18,7 +18,7 @@ Class SQLdata
 		$query->execute(array($id_game));
 		$data = $query->fetch();
 		return unserialize(base64_decode($data['data']));
-		
+
 	}
 
 	public function setUnivers($id_game, $data)
@@ -38,13 +38,13 @@ Class SQLdata
 		foreach ($db->exec($id_game) as $value)
 			$data[] = $value;
 		return $data;
-		
+
 	}
 
 	public function cleanUnivers()
 	{
 		$db = connect();
-		$query = $db->prepare("SELECT id, date_crea FROM game");
+		$query = $db->prepare("DELETE FROM game WHERE (date_crea + 3600) < CURRENT_TIME");
 		$query->execute();
 		foreach ($query->fetch() as $value) {
 			if ($value['date_crea'] + 3600 < time())

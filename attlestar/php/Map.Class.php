@@ -142,17 +142,17 @@ Class Map {
 		}
 	}
 	public function unsetCoord($elem) {
-        if (is_subclass_of($elem, 'IElem')) {
-            for ($x = 0; $x <= $elem->getSizeX(); ++$x) {
-                for ($y = 0; $y <= $elem->getSizeY(); ++$y) {
-                    if ($elem->getPosX() >= 0 and $elem->getPosX() < $this->_size_x and $elem->getPosY() >= 0 and $elem->getPosY() < $this->_size_x) {
-                        $this->_plate[$elem->getPosX() + $x][$elem->getPosY() + $y] = null;
-                    }
-                }
-            }
-        }
+		if (is_subclass_of($elem, 'IElem')) {
+			for ($x = 0; $x <= $elem->getSizeX(); ++$x) {
+				for ($y = 0; $y <= $elem->getSizeY(); ++$y) {
+					if ($elem->getPosX() >= 0 and $elem->getPosX() < $this->_size_x and $elem->getPosY() >= 0 and $elem->getPosY() < $this->_size_x) {
+						$this->_plate[$elem->getPosX() + $x][$elem->getPosY() + $y] = null;
+					}
+				}
+			}
+		}
 
-    }
+	}
 	public function setCoord($elem) {
 		if (is_subclass_of($elem, 'IElem')) {
 			for ($x = 0; $x <= $elem->getSizeX(); ++$x) {

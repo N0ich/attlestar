@@ -17,11 +17,11 @@ function file(fichier) //Fonction de traitement AJAX
 		return(false);
 }
 
-function    efface() {
+function	efface() {
 	document.getElementById('message').value = "";
 }
 
-function    envoi(message) {
+function	envoi(message) {
 	result = file('shoutbox.php?message=' + message);
 	document.getElementById('chat').innerHTML = result;
 	element = document.getElementById('chat');
