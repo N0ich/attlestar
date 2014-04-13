@@ -1,0 +1,9 @@
+game --------------------------------------->
+the Game class configure a new game for attlestar !
+
+public function refresh() -> refresh the map
+public function refreshMove() -> refresh the move
+public function refreshRotate() -> refresh Rotate
+public function refreshInactive() -> refresh interaction
+public function refreshFire() -> refresh fire
+<--------------------------------------- Game
