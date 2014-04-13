@@ -37,11 +37,18 @@ Class Map {
 			$y = 0;
 			print("<tr>" . PHP_EOL );
 			foreach ($line as $tile) {
-				print('<td id="' . $x . "x" . $y . '"  class="tile" onmouseover="affpos(\''.$x.'x'.$y.'\')" ');
+				print('<td id="' . $x . "x" . $y . '"  class="tile" ');
 				if ($tile == null)
 					print(' title="space" ' );
-				else
+				else {
 					print($tile->getStyle());
+					if ($tile->getStyle() == " style =\"background-color: white; opacity: 0.95; border: 1px inset #424242;\" title=\"highlight\"")
+						echo "onclick='move(\"".$x."\",\"".$y."\")'";
+					else if ($tile->getStyle() == " style =\"background-color: pink; opacity: 0.95; border: 1px inset #424242;\" title=\"fire\"")
+						echo "onclick='damage(\"".$x."\",\"".$y."\")'";
+					else if ($tile->getStyle() != " style =\"background-color: #424242; opacity: 0.95; border: 1px inset #424242; border-radius: 20%;\" title=\"asteroide\"")
+						echo "onclick='highlight(\"".$x."\",\"".$y."\")'";
+			}
 				print('></td>' . PHP_EOL);
 				++$y;
 			}
@@ -57,12 +64,23 @@ Class Map {
 			array_push($this->_elems, $elem);
 			$this->setCoord($elem);
 		}
-        else  {
-            foreach ($elem->getElems() as $ship)
-                $this->addElem($ship);
-        }
+		else  {
+			foreach ($elem->getElems() as $ship)
+				$this->addElem($ship);
+		}
 	}
+	public function unsetCoord($elem) {
+        if (is_subclass_of($elem, 'IElem')) {
+            for ($x = 0; $x <= $elem->getSizeX(); ++$x) {
+                for ($y = 0; $y <= $elem->getSizeY(); ++$y) {
+                    if ($elem->getPosX() >= 0 and $elem->getPosX() < $this->_size_x and $elem->getPosY() >= 0 and $elem->getPosY() < $this->_size_x) {
+                        $this->_plate[$elem->getPosX() + $x][$elem->getPosY() + $y] = null;
+                    }
+                }
+            }
+        }
 
+    }
 	public function setCoord($elem) {
 		if (is_subclass_of($elem, 'IElem')) {
 			for ($x = 0; $x <= $elem->getSizeX(); ++$x) {
@@ -74,6 +92,7 @@ Class Map {
 			}
 		}
 	}
+	public function getElem() { return ($this->_elems); }
 	public function getSize_x() { return ($this->_size_x); }
 	private function setSize_x( $size_x ) { $this->_size_x = $size_x; }
 	public function getSize_y() { return ($this->_size_y); }
