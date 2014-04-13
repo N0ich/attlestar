@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="../style/icomoon.css">
 		<link rel="stylesheet" href="css/grille.css">
 		<title>Dat partie</title>
 		<script src="script.js"></script>

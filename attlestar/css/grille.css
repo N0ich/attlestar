@@ -83,3 +83,23 @@ button {
 button:hover {
 	background-color: #0A748F;
 }
+
+#ship {
+	border: 5px solid #839496;
+	border-radius: 5px;
+	background-color: rgb(78, 78, 78);
+	color: white;
+	margin-bottom: 8px;
+}
+
+#ship #name {
+	text-decoration: underline;
+}
+
+.hp {
+	border: solid 2px rgb(160, 22, 22);
+}
+
+.pp {
+	border: solid 2px rgb(39, 39, 136);
+}
