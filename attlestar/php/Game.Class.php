@@ -30,6 +30,12 @@ Class Game {
 		echo '</div>';
 	}
 
+	public function refreshRotate() {
+		echo '<div id="plate">';
+		$this->getMap()->printRotate();
+		echo '</div>';
+	}
+
 	public function refreshInactive() {
 		echo '<div id="plate">';
 		$this->getMap()->printInactive();

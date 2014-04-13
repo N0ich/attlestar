@@ -17,10 +17,10 @@ $ret = $game->getMap()->getPlate()[$x][$y];
 $_SESSION['ship'] = serialize($ret);
 if ($ret)
 {
-	$hl = new Highlight($ret, "move", $ret->getOrientation());
+	$hl = new Highlight($ret, "rotate", $ret->getOrientation());
 	$game->getMap()->addElem($hl);
 	$game->getMap()->addElem($ret);
 }
-echo $game->refreshMove();
+echo $game->refreshRotate();
 
 ?>

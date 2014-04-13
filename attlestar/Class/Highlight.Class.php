@@ -9,13 +9,25 @@ Class Highlight implements IElem {
 	private $_mv;
 	private $_style;
 
-	public function __construct($ship, $status) {
+	public function __construct($ship, $status, $orientation) {
 		$this->_posx = $ship->getPosX();
 		$this->_posy = $ship->getPosY();
-		$this->_sizex = 1;
 		if ($status == "move")
 		{
-			$this->_sizey = 20;
+			if ($orientation == 1 || $orientation == 3)
+			{
+				$this->_sizey = 20;
+				$this->_sizex = 1;
+			}
+			if ($orientation == 3)
+				$this->_posy -= 20;
+			if ($orientation == 2 || $orientation == 4)
+			{
+				$this->_sizex = 20;
+				$this->_sizey = 1;
+			}
+			if ($orientation == 4)
+				$this->_posx -= 20;
 			$this->_type = 'highlight';
 			$this->_style = new Style (array('opacity' => 0.95,
 											 'border' => '1px inset #424242',
@@ -23,7 +35,7 @@ Class Highlight implements IElem {
 											 'name' => 'highlight'
 										   ));
 		}
-		else
+		else if ($status == "fire")
 		{
 			$this->_type = 'fire';
 			$this->_style = new Style (array('opacity' => 0.95,
@@ -31,10 +43,43 @@ Class Highlight implements IElem {
 											 'color' => '#D17C21',
 											 'name' => 'fire'
 										   ));
-			$this->_sizey = 30;
+			if ($orientation == 1 || $orientation == 3)
+			{
+				$this->_sizey = 30;
+				$this->_sizex = 1;
+			}
+			if ($orientation == 3)
+				$this->_posy -= 30;
+			if ($orientation == 2 || $orientation == 4)
+			{
+				$this->_sizex = 30;
+				$this->_sizey = 1;
+			}
+			if ($orientation == 4)
+				$this->_posx -= 30;
+		}
+		else if ($status == "rotate")
+		{
+			$this->_type = 'rotate';
+			$this->_style = new Style (array('opacity' => 0.95,
+											 'border' => '1px inset #424242',
+											 'color' => '#000000',
+											 'name' => 'rotate'
+										   ));			
+			if ($orientation == 1 || $orientation == 3)
+			{
+				$this->_sizex = 5;
+				$this->_posx -= 2;
+				$this->_sizey = 1;
+			}
+			if ($orientation == 2 || $orientation == 4)
+			{
+				$this->_sizey = 5;
+				$this->_sizex = 1;
+				$this->_posy -= 2;
+			}
 		}
 	}
-
 	public function getType() { return ($this->_type); }
     public function getStyle() { return ($this->_style); }
     public function getPosX() { return ($this->_posx); }

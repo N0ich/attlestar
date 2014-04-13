@@ -6,6 +6,7 @@ Class Ship implements IElem {
     private $_type = null;
     private $_team = null;
 	private $_posx = 0;
+	private $_orientation = 0;
 	private $_posy = 0;
 	private $_sizex = 0;
 	private $_sizey = 0;
@@ -28,6 +29,7 @@ Class Ship implements IElem {
         array_key_exists('posx', $arg) &&
         array_key_exists('posy', $arg) &&
         array_key_exists('movement', $arg) &&
+        array_key_exists('orientation', $arg) &&
         array_key_exists('sizex', $arg) &&
         array_key_exists('sizey', $arg) &&
         array_key_exists('weapon', $arg) &&
@@ -37,6 +39,7 @@ Class Ship implements IElem {
             $this->_posx = $arg['posx'];
             $this->_posy = $arg['posy'];
             $this->_movement = $arg['movement'];
+            $this->_orientation = $arg['orientation'];
             $this->_sizex = $arg['sizex'];
             $this->_sizey = $arg['sizey'];
             $this->_hp = $arg['hp'];
@@ -75,6 +78,8 @@ Class Ship implements IElem {
     public function getType() { return ($this->_type); }
     public function setType($val) { $this->_type = $val; }
     public function getStyle() { return ($this->_style); }
+    public function getOrientation() { return ($this->_orientation); }
+    public function setOrientation($val) { $this->_orientation = $val; }
     public function getMovement() { return ($this->_movement); }
     public function getPosX() { return ($this->_posx); }
     public function setPosX( $posx ) { $this->_posx = $posx; }

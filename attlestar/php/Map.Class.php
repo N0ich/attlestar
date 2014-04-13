@@ -43,7 +43,7 @@ Class Map {
 				else {
 					print($tile->getStyle());
 					if ($tile->getStyle() != " style =\"background-color: #424242; opacity: 0.95; border: 1px inset #424242; border-radius: 20%;\" title=\"asteroide\"")
-						echo " onclick='highlight(\"".$x."\",\"".$y."\")'";
+						echo " onclick='highlight(\"".$x."\",\"".$y."\")' oncontextmenu='javascript:rotate(\"".$x."\",\"".$y."\");return false;'";
 			}
 				print('></td>' . PHP_EOL);
 				++$y;
@@ -94,6 +94,32 @@ Class Map {
 					print($tile->getStyle());
 					if ($tile->getStyle() == " style =\"background-color: #D9D0D0; opacity: 0.95; border: 1px inset #424242;\" title=\"highlight\"")
 						echo "onclick='move(\"".$x."\",\"".$y."\")'";
+				}
+				print('></td>' . PHP_EOL);
+				++$y;
+			}
+			++$x;
+			print( "</tr>" . PHP_EOL);
+		}
+		print( '</tbody>' . PHP_EOL );
+		print( "</table>" . PHP_EOL );
+	}
+
+	public function printRotate() {
+		print('<table summary = "map">' . PHP_EOL);
+		print('<tbody>' . PHP_EOL );
+		$x = 0;
+		foreach ($this->getPlate() as $line) {
+			$y = 0;
+			print("<tr>" . PHP_EOL );
+			foreach ($line as $tile) {
+				print('<td id="' . $x . "x" . $y . '"  class="tile" ');
+				if ($tile == null)
+					print(' title="space" ' );
+				else {
+					print($tile->getStyle());
+					if ($tile->getStyle() == " style =\"background-color: #000000; opacity: 0.95; border: 1px inset #424242;\" title=\"rotate\"")
+						echo "onclick='rot(\"".$x."\",\"".$y."\")'";
 				}
 				print('></td>' . PHP_EOL);
 				++$y;

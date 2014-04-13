@@ -23,6 +23,17 @@ Class Fleet {
 			return (5);
 	}
 
+	private function _creatOrient($p) {
+		if ($p == 1)
+			return (1);
+		else if ($p == 2)
+			return (3);
+		else if ($p == 3)
+			return (2);
+		else if ($p == 4)
+			return (4);
+	}
+
 	function __construct(array $arg) {
 		if (array_key_exists('size', $arg) && array_key_exists('player', $arg))
 		{
@@ -30,20 +41,22 @@ Class Fleet {
 			while ($this->_size < $arg['size'])
 			{
 				$this->addShip(
-					new Ship (array('name' => "Crusader",
-					'pp' => 10,
-					'weapon' => new Weapon (array(
-						'lrange' => 50,
-						'mrange' => 25,
-						'srange' => 10,
-						'damage' => 10)),
-					'hp' => 20,
-					'movement' => 10,
-					'posx' => self::_creatSpawnY($this->_size),
-					'posy' => self::_creatSpawnX($arg['player']),
-					'sizex' => 1,
-					'sizey' => 4
-				)));
+					new Ship (array(
+								  'name' => "Crusader",
+								  'pp' => 10,
+								  'weapon' => new Weapon (array(
+															  'lrange' => 50,
+															  'mrange' => 25,
+															  'srange' => 10,
+															  'damage' => 10)),
+								  'hp' => 20,
+								  'movement' => 10,
+								  'orientation' => self::_creatOrient($arg['player']),
+								  'posx' => self::_creatSpawnY($this->_size),
+								  'posy' => self::_creatSpawnX($arg['player']),
+								  'sizex' => 1,
+								  'sizey' => 1
+								  )));
 				$this->_size++;
 			}
 		}

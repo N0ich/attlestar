@@ -12,7 +12,7 @@ $id = $_SESSION['id_game'];
 $sql = New SQLdata;
 $game = $sql->getUnivers($id);
 $ship = unserialize($_SESSION['ship']);
-$hl = new Highlight($ship, "fire");
+$hl = new Highlight($ship, "fire", $ship->getOrientation());
 $game->getMap()->addElem($hl);
 $game->getMap()->addElem($ship);
 echo $game->refreshFire();
