@@ -20,7 +20,7 @@ Class Highlight implements IElem {
 				$this->_sizex = 1;
 			}
 			if ($orientation == 3)
-			{			
+			{
 				$this->_posy -= 20;
 				if ($this->_posy < 0)
 					$this->_posy = 0;
@@ -38,10 +38,9 @@ Class Highlight implements IElem {
 			}
 			$this->_type = 'highlight';
 			$this->_style = new Style (array('opacity' => 0.95,
-											 'border' => '1px inset #424242',
-											 'color' => '#D9D0D0',
-											 'name' => 'highlight'
-										   ));
+											'border' => '1px inset #424242',
+											'color' => '#D9D0D0',
+											'name' => 'highlight'));
 		}
 		else if ($status == "fire")
 		{
@@ -50,7 +49,7 @@ Class Highlight implements IElem {
 											 'border' => '1px inset #424242',
 											 'color' => '#D17C21',
 											 'name' => 'fire'
-										   ));
+										));
 			if ($orientation == 1 || $orientation == 3)
 			{
 				$this->_sizey = 30;
@@ -81,7 +80,7 @@ Class Highlight implements IElem {
 											 'border' => '1px inset #424242',
 											 'color' => '#000000',
 											 'name' => 'rotate'
-										   ));			
+										   ));
 			if ($orientation == 1 || $orientation == 3)
 			{
 				$this->_sizex = 5;
@@ -101,11 +100,11 @@ Class Highlight implements IElem {
 		}
 	}
 	public function getType() { return ($this->_type); }
-    public function getStyle() { return ($this->_style); }
-    public function getPosX() { return ($this->_posx); }
-    public function getPosY() { return ($this->_posy); }
+	public function getStyle() { return ($this->_style); }
+	public function getPosX() { return ($this->_posx); }
+	public function getPosY() { return ($this->_posy); }
 	public function getSizeX() { return ($this->_sizex); }
-    public function getSizeY() { return ($this->_sizey); }
+	public function getSizeY() { return ($this->_sizey); }
 }
 
 ?>
