@@ -17,7 +17,6 @@ if ($_SESSION['id'] == $_GET['player1']) {
 	$game = new Game();
     Game::$shipData = loadJson($ships);
     Game::$weaponData = loadJson($weapons);
-    print_r(Game::$shipData);
 	$style1 = new Style( array('color' => '#424242', 'opacity' => 0.95, 'name' => 'asteroide', 'border' => '1px inset #424242; border-radius: 20%') );
 	for ($i = 0; $i < 60; ++$i) {
 		$a = array( 'name' => 'asteroide', 'style' => $style1);

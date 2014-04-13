@@ -19,14 +19,14 @@ if ($ship->getOrientation() == 2 || $ship->getOrientation() == 4)
 {
 	if ($y > $ship->getPosY())
 		$ship->setOrientation(1);
-	else if ($y < $ship->getPosY())
+	else ($y < $ship->getPosY())
 		$ship->setOrientation(3);
 }
 else if ($ship->getOrientation() == 1 || $ship->getOrientation() == 3)
 {
 	if ($x > $ship->getPosX())
 		$ship->setOrientation(4);
-	else if ($x < $ship->getPosX())
+	else ($x < $ship->getPosX())
 		$ship->setOrientation(2);
 }
 $game->getMap()->addElem($ship);

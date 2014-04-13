@@ -170,7 +170,7 @@ Class Map {
 
     private function _removeElem($elem){
         $t = array();
-        for ($i = 0; $i < $this->_elems.length(); ++$i) {
+        for ($i = 0; $i < count($this->_elems); ++$i) {
             if ($this->_elems[$i] != $elem) {
                 array_push($t, $this->_elems[$i]);
             }
@@ -189,10 +189,9 @@ Class Map {
 				}
 			}
 		}
-        self::_removeElem($elem);
+//        self::_removeElem($elem);
 	}
 	public function setCoord($elem) {
-        print($elem->getPosX() . " " . $elem->getPosY() . PHP_EOL);
         if (is_subclass_of($elem, 'IElem')) {
 			for ($x = 0; $x <= $elem->getSizeX(); ++$x) {
 				for ($y = 0; $y <= $elem->getSizeY(); ++$y) {

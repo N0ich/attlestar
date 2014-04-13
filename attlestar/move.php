@@ -16,9 +16,9 @@ $x = $_GET['x'];
 $y = $_GET['y'];
 $game->getMap()->unsetCoord($ship);
 if ($ship->getOrientation() == 2 || $ship->getOrientation() == 4)
-	$ship->setPosX($x);
+	$ship->setPosY($x);
 if ($ship->getOrientation() == 1 || $ship->getOrientation() == 3)
-	$ship->setPosY($y);
+	$ship->setPosX($y);
 $game->getMap()->addElem($ship);
 $sql->setUnivers($id, $game);
 $_SESSION['ship'] = serialize($ship);
