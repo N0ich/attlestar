@@ -1,7 +1,3 @@
-function	init_page() {
-	aff_map();
-}
-
 function	aff_map() {
 	map = file("aff_map.php");
 	document.getElementById('map').innerHTML = map;
@@ -27,7 +23,7 @@ function	highlight(x, y) {
 	document.getElementById('map').innerHTML = newmap;
 }
 
-function file(fichier) //Fonction de traitement AJAX
+function	file(fichier) //Fonction de traitement AJAX
 {
 	if(window.XMLHttpRequest) // FIREFOX
 		xhr_object = new XMLHttpRequest();
@@ -41,4 +37,19 @@ function file(fichier) //Fonction de traitement AJAX
 		return(xhr_object.responseText);
 	else
 		return(false);
+}
+
+function	endofturn() {
+	file('endofturn.php');
+	player = file('player.php');
+	document.getElementById('alert').innerHTML = player;
+	aff_map();
+	setTimeout('endofturn()', 5000);
+}
+
+function	leave() {
+	choice = confirm("Voulez-vous vraiment quitter la partie?");
+	if (choice == true) {
+		//leave
+	}
 }

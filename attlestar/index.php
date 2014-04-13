@@ -6,27 +6,49 @@ require_once 'php/Obstacle.Class.php';
 require_once 'Class/Fleet.Class.php';
 include 'php/header.php';
 include 'php/utils.php';
-$game = new Game();
+include '../includes/config.php';
 
-$style1 = new Style( array('color' => '#424242', 'opacity' => 0.95, 'name' => 'asteroide', 'border' => '1px inset #424242; border-radius: 20%') );
-for ($i = 0; $i < 6; ++$i) {
-	$a = array( 'name' => 'asteroide', 'style' => $style1);
-	$a['sizex'] = mt_rand(5, 10);
-	$a['sizey'] = mt_rand(5, 10);
-	$a['posx'] = mt_rand(10, 70);
-	$a['posy'] = mt_rand(30, 100);
-	$obstacle = new Obstacle ($a);
-	$game->getMap()->addElem($obstacle);
+$db = connect();
+if ($_SESSION['id'] == $_GET['player1']) {
+
+	$game = new Game();
+	$style1 = new Style( array('color' => '#424242', 'opacity' => 0.95, 'name' => 'asteroide', 'border' => '1px inset #424242; border-radius: 20%') );
+	for ($i = 0; $i < 6; ++$i) {
+		$a = array( 'name' => 'asteroide', 'style' => $style1);
+		$a['sizex'] = mt_rand(5, 10);
+		$a['sizey'] = mt_rand(5, 10);
+		$a['posx'] = mt_rand(10, 70);
+		$a['posy'] = mt_rand(30, 100);
+		$obstacle = new Obstacle ($a);
+		$game->getMap()->addElem($obstacle);
+	}
+	$player = array();
+	$player[0] = $_GET['type'];
+	for ($i = 1; $i <= $_GET['type']; $i++) {
+		$player[$i] = $_GET["player".$i];
+		${"fleet". $i} = new Fleet(array('size' => 5, 'player' => $i));
+		$game->getMap()->addElem(${"fleet".$i});
+	}
+	$sql = New SQLData;
+	$id = $sql->creatUnivers($game);
+	$_SESSION['id_game'] = $id;
+	$_SESSION['sql'] = $sql;
+	$db->query('CREATE TABLE chat'.$id.' (login varchar(50), message TEXT, time TEXT)');
 }
-$fleet1 = new Fleet(array('size' => 5, 'player' => 1));
-$fleet2 = new Fleet(array('size' => 5, 'player' => 2));
-
-$game->getMap()->addElem($fleet1);
-$game->getMap()->addElem($fleet2);
-$sql = New SQLData;
-$id = $sql->creatUnivers($game);
-$_SESSION['id_game'] = $id;
-$_SESSION['sql'] = $sql;
+else {
+	sleep(2);
+	$query = $db->query('SELECT max(id) FROM game');
+	$data = $query->fetch();
+	$_SESSION['id_game'] = $data[0];
+	$player = array();
+	$player[0] = $_GET['type'];
+	for ($i = 1; $i <= $_GET['type']; $i++) {
+		$player[$i] = $_GET["player".$i];
+	}
+}
+$_SESSION['players'] = serialize($player);
+$_SESSION['isplay'] = 1;
+$db->query('UPDATE game SET connected = connected + 1');
 header("Location: game.php");
 include 'php/footer.php';
 

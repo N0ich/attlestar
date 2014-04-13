@@ -195,3 +195,18 @@ table td, th {
 	border: 3px solid #05242B;
 	padding: 1em;
 }
+
+button {
+	height: 150px;
+	width: 700px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 40px;
+	color: #002b36;
+	background-color: #839496;
+	border: solid 5px white;
+	border-radius: 10px;
+}
+
+button:hover {
+	background-color: #0A748F;
+}

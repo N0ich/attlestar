@@ -5,7 +5,11 @@
 		<title>Dat partie</title>
 		<script src="script.js"></script>
 	</head>
-	<body onload="init_page()">
+	<body onload="endofturn()">
+		<div id="alert"></div>
+		<div id="chat">
+			<iframe src="chat.php"></iframe>
+		</div>
 		<div id="map"></div>
 	</body>
 </html>
