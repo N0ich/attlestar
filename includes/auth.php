@@ -14,6 +14,7 @@ include('/includes/config.php');
 			$_SESSION['mail'] = $data['mail'];
 			$_SESSION['pwon'] = $data['pwon'];
 			$_SESSION['ploose'] = $data['ploose'];
+			$db->query('UPDATE users SET online = true WHERE id = '.$data['id']);
 			return (true);
 		}
 		return (false);

@@ -30,7 +30,7 @@ footer {
 	width: 100%;
 	margin: 0 auto;
 	padding: 10px;
-	font-size: 10px;
+	font-size: 15px;
 	bottom:0;
 }
 
@@ -185,4 +185,13 @@ li {
 ::-webkit-scrollbar-thumb:horizontal {
 	height: 0px;
 	background-color: #0A4C95;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table td, th {
+	border: 3px solid #05242B;
+	padding: 1em;
 }

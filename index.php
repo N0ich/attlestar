@@ -10,3 +10,5 @@ include('includes/header.php');
 		include('includes/chat.php');
 	?>
 </div>
+<script> envoi('2e36f5748d06238ecb29f42458090a4d')</script>
+<?php include('includes/footer.php');
