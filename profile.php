@@ -11,8 +11,10 @@
 	));
 	$data = $query->fetch();
 	if ($data) {
-		if (isset($data['img'])) {
+		if (!($data['img'])) {
 			echo "<img class='profile' src='http://www.webdesignerforum.co.uk/uploads/profile/photo-1407.jpg?_r=1396701824'>";
+		} else {
+			echo "<img class='profile' src='".$data['img']."'>";
 		}
 		echo "<h1>".$data['login']."</h1>";
 		if ($data['online'])
@@ -39,6 +41,9 @@
 		echo "<br /><br />Nombre de partie jouees: ".($data['pwon'] + $data['ploose'])."<br />";
 		echo "Nombre de partie gagnees: <span style='color: green'>".$data['pwon']."</span><br />";
 		echo "Nombre de partie perdues: <span style='color: red'>".$data['ploose']."</span><br />";
+		if ($_SESSION['id'] == $_GET['id']) {
+			echo "<br /><a href='modif_profil.php'><button style='height: 80px; width: 250px; font-size: 20px;'>Modifier mon profil</button></a>";
+		}
 	} else {
 		echo "<h1>Profile not found :(</h1>";
 	}

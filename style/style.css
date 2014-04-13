@@ -211,6 +211,11 @@ button:hover {
 	background-color: #0A748F;
 }
 
+.slow {
+	height: 80px !important;
+	width: 250px !important;
+}
+
 .profile {
 	height: 200px;
 	width: 200px;

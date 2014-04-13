@@ -5,7 +5,7 @@
 ?>
 <footer>
 	<?php echo "Il y a ".$query[0]." utilisateur(s) en ligne<br />";?>
-	dat footer, such git <a href="https://github.com/N0ich/attlestar"><i class="icon-github3"></i></a>
+	dat footer, such git <a href="https://github.com/N0ich/attlestar"><i class="icon-github3"></i></a>, Much wow
 </footer>
 </body>
 </html>

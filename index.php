@@ -5,6 +5,8 @@ include('includes/header.php');
 	<?php
 		if (isset($_GET['justlogged']) && isset($_SESSION['login'])) {
 			echo "<div class='alert success'>Bienvenue ".$_SESSION['login']. "!</div>";
+		} else if (isset($_GET['justdelog'])) {
+			echo "<div class='alert success'>Vous avez bien ete deconnecte. A la prochaine!</div>";
 		}
 	if (isset($_SESSION['login'])) {
 		echo "<center><h3>Chat <i class='icon-bubble'></i></h3></center>";
