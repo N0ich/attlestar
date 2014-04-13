@@ -8,7 +8,7 @@ require_once 'Class/Fleet.Class.php';
 require_once 'Class/Highlight.Class.php';
 require_once 'php/Obstacle.Class.php';
 
-$id = $_SESSION['id'];
+$id = $_SESSION['id_game'];
 $sql = New SQLdata;
 $game = $sql->getUnivers($id);
 $x = $_GET['x'];

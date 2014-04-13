@@ -9,7 +9,6 @@ include 'php/utils.php';
 $game = new Game();
 
 $style1 = new Style( array('color' => '#424242', 'opacity' => 0.95, 'name' => 'asteroide', 'border' => '1px inset #424242; border-radius: 20%') );
-
 for ($i = 0; $i < 6; ++$i) {
 	$a = array( 'name' => 'asteroide', 'style' => $style1);
 	$a['sizex'] = mt_rand(5, 10);
@@ -26,7 +25,8 @@ $game->getMap()->addElem($fleet1);
 $game->getMap()->addElem($fleet2);
 $sql = New SQLData;
 $id = $sql->creatUnivers($game);
-$_SESSION['id'] = $id;
+echo "lol";
+$_SESSION['id_game'] = $id;
 $_SESSION['sql'] = $sql;
 header("Location: game.php");
 include 'php/footer.php';
