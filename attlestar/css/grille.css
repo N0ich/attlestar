@@ -25,6 +25,7 @@ table, thead, tbody, th, td, tr {
 	width: 1600px;
 	height: 1200px;
 	margin-top: 5px;
+	background-image: url("/attlestar/ressource/background/bg-1.jpg");
 }
 #alert{
 	float: left;

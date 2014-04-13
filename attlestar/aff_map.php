@@ -1,6 +1,6 @@
 <?PHP
 session_start();
-include('../includes/config.php');
+include_once('../includes/config.php');
 require_once 'php/SQLdata.Class.php'; 
 require_once 'php/Game.Class.php'; 
 require_once 'php/IElem.Class.php'; 

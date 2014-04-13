@@ -8,17 +8,23 @@ include 'php/header.php';
 include 'php/utils.php';
 include '../includes/config.php';
 
+
+$weapons = "ressource/data/weapons.json";
+$ships = "ressource/data/ships.json";
 $db = connect();
 if ($_SESSION['id'] == $_GET['player1']) {
 
 	$game = new Game();
+    Game::$shipData = loadJson($ships);
+    Game::$weaponData = loadJson($weapons);
+    print_r(Game::$shipData);
 	$style1 = new Style( array('color' => '#424242', 'opacity' => 0.95, 'name' => 'asteroide', 'border' => '1px inset #424242; border-radius: 20%') );
-	for ($i = 0; $i < 6; ++$i) {
+	for ($i = 0; $i < 60; ++$i) {
 		$a = array( 'name' => 'asteroide', 'style' => $style1);
 		$a['sizex'] = mt_rand(5, 10);
 		$a['sizey'] = mt_rand(5, 10);
-		$a['posx'] = mt_rand(10, 70);
-		$a['posy'] = mt_rand(30, 100);
+		$a['posx'] = mt_rand(1, 130);
+		$a['posy'] = ($a['posx'] > 30 && $a['posx'] < 130 ? mt_rand(1, 85) : mt_rand(30, 50));
 		$obstacle = new Obstacle ($a);
 		$game->getMap()->addElem($obstacle);
 	}
@@ -26,7 +32,7 @@ if ($_SESSION['id'] == $_GET['player1']) {
 	$player[0] = $_GET['type'];
 	for ($i = 1; $i <= $_GET['type']; $i++) {
 		$player[$i] = $_GET["player".$i];
-		${"fleet". $i} = new Fleet(array('size' => 5, 'player' => $i));
+		${"fleet". $i} = new Fleet(array('race' => 'raceType1', 'player' => $i));
 		$game->getMap()->addElem(${"fleet".$i});
 	}
 	$sql = New SQLData;

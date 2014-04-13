@@ -1,5 +1,5 @@
 <?php
-include('../../includes/config.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/includes/config.php');
 Class SQLdata
 {
 	public function creatUnivers($data)

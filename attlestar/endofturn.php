@@ -1,5 +1,5 @@
 <?php
-	include('../includes/config.php');
+	include_once('../includes/config.php');
 session_start();
 $players = unserialize($_SESSION['players']);
 if ($_SESSION['id'] == $players[1]) {

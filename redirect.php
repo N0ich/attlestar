@@ -12,7 +12,7 @@
 		if ($tab[$i]) {
 			echo "<h1>La partie va commencer! Tenez-vous pret!</h1>";
 			for ($i = 0; $i < count($tab); $i++) {
-				if ($result)
+				if (isset($result))
 					$result .= "player".($i + 1)."=".$tab[$i]."&";
 				else
 					$result = "player".($i + 1)."=".$tab[$i]."&";

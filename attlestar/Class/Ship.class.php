@@ -24,27 +24,42 @@ Class Ship implements IElem {
 
 	function __construct(array $arg) {
         $this->_type = "ship";
-		if (array_key_exists('pp', $arg) &&
-        array_key_exists('name', $arg) &&
-        array_key_exists('posx', $arg) &&
-        array_key_exists('posy', $arg) &&
-        array_key_exists('movement', $arg) &&
-        array_key_exists('orientation', $arg) &&
-        array_key_exists('sizex', $arg) &&
-        array_key_exists('sizey', $arg) &&
-        array_key_exists('weapon', $arg) &&
-        array_key_exists('hp', $arg)) {
+		if (array_key_exists('posx', $arg) && array_key_exists('posy', $arg) &&
+        array_key_exists('name', $arg) && array_key_exists('ship', $arg) &&
+        array_key_exists('orientation', $arg)) {
             $this->_name = $arg['name'];
-            $this->_ppmax = $arg['pp'];
+            $this->_movement = $arg['ship']['movement'];
+            $this->_orientation = $arg['orientation'];
             $this->_posx = $arg['posx'];
             $this->_posy = $arg['posy'];
-            $this->_movement = $arg['movement'];
-            $this->_orientation = $arg['orientation'];
-            $this->_sizex = $arg['sizex'];
-            $this->_sizey = $arg['sizey'];
-            $this->_hp = $arg['hp'];
-            $this->_weapon = $arg['weapon'];
+            $this->_ppmax = $arg['ship']['pp'];
+            $this->_weapon = $arg['ship']['weapon'];
+            $this->_hp = $arg['ship']['hp'];
+            $this->_sizex = $arg['ship']['sizex'];
+            $this->_sizey = $arg['ship']['sizey'];
         }
+        /* $this->_type = "ship"; */
+		/* if (array_key_exists('pp', $arg) && */
+        /* array_key_exists('name', $arg) && */
+        /* array_key_exists('posx', $arg) && */
+        /* array_key_exists('posy', $arg) && */
+        /* array_key_exists('movement', $arg) && */
+        /* array_key_exists('orientation', $arg) && */
+        /* array_key_exists('sizex', $arg) && */
+        /* array_key_exists('sizey', $arg) && */
+        /* array_key_exists('weapon', $arg) && */
+        /* array_key_exists('hp', $arg)) { */
+        /*     $this->_name = $arg['name']; */
+        /*     $this->_ppmax = $arg['pp']; */
+        /*     $this->_posx = $arg['posx']; */
+        /*     $this->_posy = $arg['posy']; */
+        /*     $this->_movement = $arg['movement']; */
+        /*     $this->_orientation = $arg['orientation']; */
+        /*     $this->_sizex = $arg['sizex']; */
+        /*     $this->_sizey = $arg['sizey']; */
+        /*     $this->_hp = $arg['hp']; */
+        /*     $this->_weapon = $arg['weapon']; */
+        /* } */
 		else
 			return (NULL);
 		if (self::$verbose == TRUE)

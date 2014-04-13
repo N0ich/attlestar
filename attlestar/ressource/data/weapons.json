@@ -1,0 +1,14 @@
+{
+    "weaponType1":{
+	"weapon1": {
+	    "range": [10, 25, 50];//srange, mrange, lrange
+	    "weapon": {"weapon1", "weapon2"},
+	    "hp": 20
+	}
+	"weapon2": {
+	    "range": [10, 25, 50],//srange, mrange, lrange
+	    "weapon": {"weapon1", "weapon2"},
+	    "hp": 20
+	}
+    }
+}

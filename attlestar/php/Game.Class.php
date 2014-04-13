@@ -3,10 +3,12 @@ require_once 'Map.Class.php';
 Class Game {
 
 	public static $verbose = FALSE;
+    public static $shipData = null;
+    public static $weaponData = null;
 	private $_map;
 
-	const SIZE_X = 100;
-	const SIZE_Y = 150;
+	const SIZE_X = 150;
+	const SIZE_Y = 100;
 
 	public function doc(){echo file_get_contents('Game.doc.txt'); }
 
