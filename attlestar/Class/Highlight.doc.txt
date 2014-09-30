@@ -1,8 +1,0 @@
-Highlight -------------------------------------------------------------------->
-Highlight puts in evidence the posibility of movement of vessels
-
---> public function __construct($ship, $status, $orientation)
-$ship, ship object expected.
-$status, string expected ("move" / "fire" / "rotate")
-$orientation, int expected (1 to 4)
-<-------------------------------------------------------------------- Highlight

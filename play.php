@@ -1,16 +1,22 @@
 <?php
-	include('includes/header.php');
+	/*
+	 * Test for three.js
+	 * By: Louis <louis@ne02ptzero.me>
+	*/
 ?>
-<div class="content">
-	<h1>Jouer!</h1>
-	<h3>Nombre de joueurs</h3>
-	<select id="player">
-		<option value="2">2</option>
-		<option value="3">3</option>
-		<option value="4">4</option>
-	</select>
-	<input type="submit" value="Chercher des adversaires!" onclick="lobby()">
-	<div id="wait_players"></div>
-</div>
-
-<?php include('includes/footer.php'); ?>
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Attlestar</title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<div id="game"></div>
+	</body>
+	<script src="http://mrdoob.github.io/three.js/build/three.min.js"></script>
+	<script src='js/lib/js/loaders/OBJLoader.js'></script>
+	<script src='js/lib/js/loaders/MTLLoader.js'></script>
+	<script src='js/lib/js/loaders/OBJMTLLoader.js'></script>
+	<script src="js/lib/threex.spaceships.js"></script>
+	<script src="js/main.js"></script>
+</html>
