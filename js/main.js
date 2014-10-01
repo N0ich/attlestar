@@ -16,7 +16,7 @@
 			onRenderFcts= [];
 			scene	= new THREE.Scene();
 			camera	= new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 100);
-			fov = 100
+			fov = 60
 		// Create the scene
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild(renderer.domElement);
@@ -44,11 +44,35 @@
 		// Add the ship
 			THREEx.SpaceShips.loadSpaceFighter01(function(object3d){
 				var x, y;
-				//for (x = -1, y = 0.5; x > -6; x = x - 4, y = y + 0.5) {
 					object3d.position.x	= -1
 					object3d.position.y	= 0.5
 					scene.add(object3d)
-				//}
+			})
+
+			THREEx.SpaceShips.loadSpaceFighter02(function(object3d){
+				var x, y;
+					object3d.position.x	= 2
+					object3d.position.y	= 2
+					scene.add(object3d)
+			})
+
+			THREEx.SpaceShips.loadSpaceFighter03(function(object3d){
+				var x, y;
+					object3d.position.x	= -2
+					object3d.position.y	= 2
+					scene.add(object3d)
+			})
+
+		// Mouse Control
+			var mouse= {x : 0, y : 0}
+			document.addEventListener('mousemove', function(event){
+				mouse.x= (event.clientX / window.innerWidth ) - 0.5
+				mouse.y= (event.clientY / window.innerHeight) - 0.5
+			}, false)
+			onRenderFcts.push(function(delta, now){
+				camera.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
+				camera.position.y += (mouse.y*5 - camera.position.y) * (delta*3)
+				camera.lookAt( scene.position )
 			})
 
 		// Render Scene

@@ -11,7 +11,6 @@
 		<meta charset="utf-8">
 	</head>
 	<body>
-		<div id="game"></div>
 	</body>
 	<script src="http://mrdoob.github.io/three.js/build/three.min.js"></script>
 	<script src='js/lib/js/loaders/OBJLoader.js'></script>
