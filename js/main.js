@@ -3,91 +3,94 @@
  * By: Louis <louis@ne02ptzero.me>
 */
 
+launchGame();
 
 /*
  * Base Settings
 */
 	// Globals
-		var renderer, onRenderFcts, scene, camera, fov;
+		var renderer, scene, camera, fov, mesh, floor;
 
-	// Settings
-		// Initialize variables
-			renderer	= new THREE.WebGLRenderer();
-			onRenderFcts= [];
-			scene	= new THREE.Scene();
-			camera	= new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 100);
-			fov = 60
-		// Create the scene
-			renderer.setSize( window.innerWidth, window.innerHeight );
-			document.body.appendChild(renderer.domElement);
-		// Camera FOV
-			camera.position.z = 10;
-			camera.position.y = 5;
-			camera.fov = fov;
-			camera.updateProjectionMatrix();
+	function	launchGame() {
+		initGame();
+		addCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+		addWorld();
+		addFloor();
+		animate();
+	}
 
-	// Main function
-		;(function(){
-			// Lights
-				// Global Light
-					var object3d	= new THREE.AmbientLight(0x101010)
-					object3d.name	= 'Ambient light'
-					scene.add(object3d)
+	/*
+	 * Initialize the WebGL and the scene
+	*/
+	function	initGame() {
+		renderer = new THREE.WebGLRenderer({ alpha: true });
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+		scene = new THREE.Scene();
+	}
 
-				// Source Light
-					var object3d	= new THREE.DirectionalLight('white', 0.225)
-					object3d.position.set(2.6,1,3)
-					object3d.name	= 'Back light'
-					scene.add(object3d)
-		})()
+	/*
+	 * Render the scene
+	*/
+	function	render() {
+		renderer.render(scene, camera);
+	}
 
-		// Add the ship
-			THREEx.SpaceShips.loadSpaceFighter01(function(object3d){
-				var x, y;
-					object3d.position.x	= -1
-					object3d.position.y	= 0.5
-					scene.add(object3d)
-			})
+	/*
+	 * Animate the scene
+	*/
+	function	animate() {
+		requestAnimationFrame(animate);
+		mesh.rotation.x += 0.00001;
+		mesh.rotation.y += 0.0001;
+		//floor.rotation.x += 0.01;
+		renderer.render(scene, camera);
+	}
 
-			THREEx.SpaceShips.loadSpaceFighter02(function(object3d){
-				var x, y;
-					object3d.position.x	= 2
-					object3d.position.y	= 2
-					scene.add(object3d)
-			})
+	/*
+	 * Add camera to the scene
+	*/
+	function	addCamera(fov, aspect, near, far) {
+		camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+		camera.position.set(0, 0, 1000);
+		camera.position.x = 0;
+		camera.position.y = 0;
+		camera.position.z = 100;
+		scene.add(camera);
+	}
 
-			THREEx.SpaceShips.loadSpaceFighter03(function(object3d){
-				var x, y;
-					object3d.position.x	= -2
-					object3d.position.y	= 2
-					scene.add(object3d)
-			})
+	/*
+	 * Add a world sphere
+	*/
+	function	addWorld() {
+		var geometry = new THREE.SphereGeometry(200, 32, 32);
+		var worldtexture = THREE.ImageUtils.loadTexture('js/img/star.png')
+		var material = new THREE.MeshBasicMaterial({ 
+			map: worldtexture,
+			side: THREE.DoubleSide
+		});
+		mesh = new THREE.Mesh(geometry, material);
+		scene.add(mesh);
+	}
 
-		// Mouse Control
-			var mouse= {x : 0, y : 0}
-			document.addEventListener('mousemove', function(event){
-				mouse.x= (event.clientX / window.innerWidth ) - 0.5
-				mouse.y= (event.clientY / window.innerHeight) - 0.5
-			}, false)
-			onRenderFcts.push(function(delta, now){
-				camera.position.x += (mouse.x*5 - camera.position.x) * (delta*3)
-				camera.position.y += (mouse.y*5 - camera.position.y) * (delta*3)
-				camera.lookAt( scene.position )
-			})
+	/*
+	 * Add a floor for the battle
+	*/
+	function	addFloor() {
+		var geometry = new THREE.PlaneGeometry(80, 80, 1, 1);
+		var material = new THREE.MeshBasicMaterial({color: 0xff0000/*, side: THREE.DoubleSide*/})
+		floor = new THREE.Mesh(geometry, material);
+		floor.position.y = -0.5;
+		floor.rotation.x = 5.92;
+		floor.rotation.z = 3.5;
+		scene.add(floor);
+	}
 
-		// Render Scene
-			onRenderFcts.push(function(){
-				renderer.render( scene, camera );
-			})
-
-		// Main Loop
-			var lastTimeMsec= null
-			requestAnimationFrame(function animate(nowMsec){
-				requestAnimationFrame( animate );
-				lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
-				var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
-				lastTimeMsec	= nowMsec
-				onRenderFcts.forEach(function(onRenderFct){
-					onRenderFct(deltaMsec/1000, nowMsec/1000)
-				})
-			})
+	/*
+	 * Add the lights to the scene
+	*/
+	function	addLight() {
+		var lumiere = new THREE.DirectionalLight(0xffffff, 1.0);
+		lumiere.position.set(0, 0, 400);
+		scene.add(lumiere);
+	}

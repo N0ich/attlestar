@@ -10,7 +10,7 @@
 		<title>Attlestar</title>
 		<meta charset="utf-8">
 	</head>
-	<body>
+	<body style='background: white'>
 	</body>
 	<script src="http://mrdoob.github.io/three.js/build/three.min.js"></script>
 	<script src='js/lib/js/loaders/OBJLoader.js'></script>
