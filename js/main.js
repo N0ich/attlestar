@@ -7,17 +7,17 @@
  * Events
 */
 	// MouseWheel
-		document.body.addEventListener('mousewheel', mousewheel, false);
-		document.body.addEventListener('DOMMouseScroll', mousewheel, false);
+		document.getElementById('main').addEventListener('mousewheel', mousewheel, false);
+		document.getElementById('main').addEventListener('DOMMouseScroll', mousewheel, false);
 	// MouseDown
-		document.body.addEventListener('mousedown', mousedown, false);
-		document.body.addEventListener('DOMMouseDown', mousedown, false);
-	// MouseUp
-		document.body.addEventListener('mouseup', mouseup, false);
-		document.body.addEventListener('DOMMouseUp', mouseup, false);
-	// MouseMove
-		document.body.addEventListener('mousemove', mousemove, false);
-		document.body.addEventListener('DOMMouseMove', mousemove, false);
+   /*     document.getElementById('main').addEventListener('mousedown', mousedown, false);*/
+		//document.getElementById('main').addEventListener('DOMMouseDown', mousedown, false);
+	//// MouseUp
+		//document.getElementById('main').addEventListener('mouseup', mouseup, false);
+		//document.getElementById('main').addEventListener('DOMMouseUp', mouseup, false);
+	//// MouseMove
+		//document.getElementById('main').addEventListener('mousemove', mousemove, false);
+		/*document.getElementById('main').addEventListener('DOMMouseMove', mousemove, false);*/
 
 
 /*
@@ -29,24 +29,39 @@
 		var grid_width = 150;
 		var density = 10;
 		var baseUrl = "js/";
-		var renderer, scene, camera, fov, mesh, g_ship,
+		var renderer, scene, camera, fov, mesh,
 			mouseX = 0, mouseY = 0, mouseDown = false;
 		var ship_left = 4.5;
 		var ship_bottom = 6.2;
 		var ship_right = 7.8;
 		var ship_top = 9.4;
+		var g_ship = {};
+		var g_ship_move = [{}];
+		var g_ship_i = 0;
+		var g_ship_move_i = 0;
 		var go = false;
 		var bound = 0;
+		var debug = 1;
 
 
 	launchGame();
 
 	function	launchGame() {
+		if (debug == 1)
+			send("Initialize WebGl...");
 		initGame();
+		if (debug == 1)
+			send("Add camera...");
 		addCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
+		if (debug == 1)
+			send("Add World...");
 		addWorld();
+		if (debug == 1)
+			send("Add Ship...");
 		addSheep(1, 15, 10, -5, ship_top);
 		addSheep(2, 5, 5, -5, ship_left);
+		if (debug == 1)
+			send("Add Grid...");
 		addLines();
 		animate();
 	}
@@ -69,21 +84,46 @@
 	}
 
 	/*
+	 * Move a ship
+	*/
+	function	move(i, x, y) {
+		g_ship_move[i]["go"] = 1;
+		g_ship_move[i]["x"] = x;
+		g_ship_move[i]["y"] = y;
+		g_ship_move_i += 1;
+	}
+	/*
 	 * Animate the scene
 	*/
 	function	animate() {
+		var i;
 		requestAnimationFrame(animate);
+		// Ship Move
+			for (i = 0; i < g_ship_move_i; i += 1) {
+				if (g_ship_move[i]["go"] == 1) {
+					ship = g_ship[i];
+					x = g_ship_move[i]["x"];
+					y = g_ship_move[i]["y"];
+					if (ship.position.x == x && ship.position.y == y) {
+						g_ship_move[i]["go"] = 0;
+						g_ship_move_i -= 1;
+					}
+					if (ship.position.x > x)
+						xInc = 0.5;
+					else
+							xInc = -0.5;
+					if (ship.position.y > y)
+							yInc = 0.5;
+					else
+						yInc = -0.5;
+					if (ship.position.x != x)
+						ship.position.x = ship.position.x - xInc;
+					if (ship.position.y != y)
+						ship.position.y = ship.position.y - yInc;
+				}
+			}
 		mesh.rotation.x += 0.00001;
 		mesh.rotation.y += 0.0001;
-		if (go == true) {
-			if (g_ship.position.x > -20)
-				g_ship.position.x = (g_ship.position.x - 0.5);
-			if (g_ship.position.y > -15)
-				g_ship.position.y = (g_ship.position.y - 0.5);
-			else if (g_ship.position.x > -20 && g_ship.position.y > -10)
-				go = false;
-		}
-		//cube.rotation.z += 0.01;
 		renderer.render(scene, camera);
 	}
 
@@ -133,7 +173,9 @@
 			object3d.rotation.x = rot_x;
 			object3d.rotation.y = way;
 			scene.add(object3d);
-			g_ship = object3d;
+			g_ship[g_ship_i] = object3d;
+			send("Add ship " + g_ship_i);
+			g_ship_i += 1;
 		});
 		return return_o;
 	}
