@@ -10,8 +10,8 @@
 		document.getElementById('main').addEventListener('mousewheel', mousewheel, false);
 		document.getElementById('main').addEventListener('DOMMouseScroll', mousewheel, false);
 	// MouseDown
-   /*     document.getElementById('main').addEventListener('mousedown', mousedown, false);*/
-		//document.getElementById('main').addEventListener('DOMMouseDown', mousedown, false);
+		document.getElementById('main').addEventListener('mousedown', mousedown, false);
+		document.getElementById('main').addEventListener('DOMMouseDown', mousedown, false);
 	//// MouseUp
 		//document.getElementById('main').addEventListener('mouseup', mouseup, false);
 		//document.getElementById('main').addEventListener('DOMMouseUp', mouseup, false);
@@ -29,13 +29,14 @@
 		var grid_width = 150;
 		var density = 10;
 		var baseUrl = "js/";
-		var renderer, scene, camera, fov, mesh,
+		var renderer, scene, camera, fov, mesh, projector,
 			mouseX = 0, mouseY = 0, mouseDown = false;
 		var ship_left = 4.5;
 		var ship_bottom = 6.2;
 		var ship_right = 7.8;
 		var ship_top = 9.4;
-		var g_ship = {};
+		var g_ship = [];
+		var g_ship_click = [];
 		var g_ship_move = [{}, {}];
 		var g_ship_i = 0;
 		var g_ship_move_i = 0;
@@ -63,6 +64,9 @@
 		if (debug == 1)
 			send("Add Grid...");
 		addLines();
+		if (debug == 1)
+			send("Add projector..");
+		projector = new THREE.Projector();
 		animate();
 	}
 
@@ -124,6 +128,8 @@
 		for (i = 0; i < g_ship_i; i += 1) {
 			if (g_ship_move[i]["go"] == 1) {
 				ship = g_ship[i];
+				shipc = g_ship_click[i];
+
 				x = g_ship_move[i]["x"];
 				y = g_ship_move[i]["y"];
 				z = g_ship_move[i]["z"];
@@ -143,11 +149,13 @@
 					yInc = 0.5;
 				else
 					yInc = -0.5;
-				if (ship.position.x != x)
+				if (ship.position.x != x) {
 					ship.position.x = ship.position.x - xInc;
-				if (ship.position.y != y)
+					shipc.position.x = shipc.position.x - xInc;
+				} if (ship.position.y != y) {
 					ship.position.y = ship.position.y - yInc;
-				if (ship.rotation.y != z) {
+					shipc.position.y = shipc.position.y - yInc;
+				} if (ship.rotation.y != z) {
 					ship.rotation.y = (ship.rotation.y - zInc);
 					ship.rotation.y = ship.rotation.y.toFixed(2);
 				}
@@ -196,12 +204,23 @@
 					object3d.material.emissive.set('white')
 				}
 			})
-			object3d.position.y = pos_y;
-			object3d.position.x = pos_x;
-			object3d.rotation.x = rot_x;
-			object3d.rotation.y = way;
-			scene.add(object3d);
-			g_ship[g_ship_i] = object3d;
+			// Visible Ship
+				object3d.position.y = pos_y;
+				object3d.position.x = pos_x;
+				object3d.position.z = 2;
+				object3d.rotation.x = rot_x;
+				object3d.rotation.y = way;
+				scene.add(object3d);
+			// Invisible Box (click)
+				object = new THREE.Mesh(new THREE.BoxGeometry(10, 10, 10),
+					new THREE.MeshBasicMaterial({color: 0xffffff, transparent: true, opacity: 0.01}));
+				object.position.y = pos_y;
+				object.position.x = pos_x;
+				object.position.z = 2;
+				scene.add(object);
+
+			g_ship.push(object3d);
+			g_ship_click.push(object);
 			send("Add ship " + g_ship_i);
 			g_ship_i += 1;
 		});
@@ -258,4 +277,24 @@
 			cPos.z += 0.3;
 		else if (d == -3 && cPos.z > 50)
 			cPos.z -= 0.3;
+	}
+
+	/*
+	 * On Mouse Down (Click)
+	*/
+	function	mousedown(event) {
+		event.preventDefault();
+		var vector = new THREE.Vector3( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1, 0.5 );
+		projector.unprojectVector( vector, camera );
+		var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+		var intersects = raycaster.intersectObjects(g_ship_click);
+		send(intersects.length);
+		if ( intersects.length > 0 ) {
+			for (i = 0; i < g_ship_i; i++) {
+				if (g_ship[i].position.x == intersects[0].object.position.x &&
+						g_ship[i].position.y == intersects[0].object.position.y) {
+					send("Ship " + i + " clicked");
+				}
+			}
+		}
 	}
