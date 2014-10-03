@@ -1,0 +1,6 @@
+{
+    "host" : "localhost",
+    "root" : "root",
+    "password" : "abc123",
+    "db": "rush02"
+}

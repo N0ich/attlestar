@@ -1,5 +1,5 @@
 <?php
-require_once 'Map.Class.php';
+require_once 'php/Map.Class.php';
 Class Game {
 
 	public static $verbose = FALSE;

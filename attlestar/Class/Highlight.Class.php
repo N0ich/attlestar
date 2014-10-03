@@ -20,17 +20,10 @@ Class Highlight implements IElem {
 				$this->_sizey = 1;
 			}
 			if ($orientation == 3)
-<<<<<<< HEAD
 			{			
 				$this->_posx -= 20;
 				if ($this->_posx < 0)
 					$this->_posx = 0;
-=======
-			{
-				$this->_posy -= 20;
-				if ($this->_posy < 0)
-					$this->_posy = 0;
->>>>>>> c665ddfb93f3ad6bda27ff71896a79c0490489f1
 			}
 			if ($orientation == 2 || $orientation == 4)
 			{
