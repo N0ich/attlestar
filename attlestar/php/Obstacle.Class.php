@@ -1,6 +1,6 @@
 <?php
-require_once 'Style.Class.php';
-require_once 'IElem.Class.php';
+require_once 'php/Style.Class.php';
+require_once 'php/IElem.Class.php';
 
 class Obstacle implements IElem {
 

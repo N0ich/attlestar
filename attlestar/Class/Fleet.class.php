@@ -1,7 +1,7 @@
 <?PHP
 
-require_once ("Ship.class.php");
-require_once ("Weapon.class.php");
+require_once ("Class/Ship.class.php");
+require_once ("Class/Weapon.class.php");
 
 Class Fleet {
 
