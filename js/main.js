@@ -36,7 +36,7 @@
 		var ship_right = 7.8;
 		var ship_top = 9.4;
 		var g_ship = {};
-		var g_ship_move = [{}];
+		var g_ship_move = [{}, {}];
 		var g_ship_i = 0;
 		var g_ship_move_i = 0;
 		var go = false;
@@ -87,9 +87,22 @@
 	 * Move a ship
 	*/
 	function	move(i, x, y) {
+		var actX = g_ship[i].position.x,
+			actY = g_ship[i].position.y,
+			futureZ = 0;
+
+		if (x > actX)
+			futureZ = ship_right;
+		else if (x < actX)
+			futureZ = ship_left;
+		if (y < actY)
+			futureZ = (futureZ + ship_bottom) / 2;
+		else if (y > actY)
+			futureZ = (futureZ + ship_top) / 2;
 		g_ship_move[i]["go"] = 1;
 		g_ship_move[i]["x"] = x;
 		g_ship_move[i]["y"] = y;
+		g_ship_move[i]["z"] = futureZ;
 		g_ship_move_i += 1;
 	}
 	/*
@@ -98,33 +111,48 @@
 	function	animate() {
 		var i;
 		requestAnimationFrame(animate);
-		// Ship Move
-			for (i = 0; i < g_ship_move_i; i += 1) {
-				if (g_ship_move[i]["go"] == 1) {
-					ship = g_ship[i];
-					x = g_ship_move[i]["x"];
-					y = g_ship_move[i]["y"];
-					if (ship.position.x == x && ship.position.y == y) {
-						g_ship_move[i]["go"] = 0;
-						g_ship_move_i -= 1;
-					}
-					if (ship.position.x > x)
-						xInc = 0.5;
-					else
-							xInc = -0.5;
-					if (ship.position.y > y)
-							yInc = 0.5;
-					else
-						yInc = -0.5;
-					if (ship.position.x != x)
-						ship.position.x = ship.position.x - xInc;
-					if (ship.position.y != y)
-						ship.position.y = ship.position.y - yInc;
-				}
-			}
+		ship_move();
 		mesh.rotation.x += 0.00001;
 		mesh.rotation.y += 0.0001;
 		renderer.render(scene, camera);
+	}
+
+	/*
+	 * Making Ship Move
+	*/
+	function	ship_move() {
+		for (i = 0; i < g_ship_i; i += 1) {
+			if (g_ship_move[i]["go"] == 1) {
+				ship = g_ship[i];
+				x = g_ship_move[i]["x"];
+				y = g_ship_move[i]["y"];
+				z = g_ship_move[i]["z"];
+				if (ship.position.x == x && ship.position.y == y) {
+					g_ship_move[i]["go"] = 0;
+					g_ship_move_i -= 1;
+				}
+				if (ship.rotation.y > z)
+					zInc = 0.05;
+				else
+					zInc = -0.05;
+				if (ship.position.x > x)
+					xInc = 0.5;
+				else
+					xInc = -0.5;
+				if (ship.position.y > y)
+					yInc = 0.5;
+				else
+					yInc = -0.5;
+				if (ship.position.x != x)
+					ship.position.x = ship.position.x - xInc;
+				if (ship.position.y != y)
+					ship.position.y = ship.position.y - yInc;
+				if (ship.rotation.y != z) {
+					ship.rotation.y = (ship.rotation.y - zInc);
+					ship.rotation.y = ship.rotation.y.toFixed(2);
+				}
+			}
+		}
 	}
 
 	/*
@@ -230,37 +258,4 @@
 			cPos.z += 0.3;
 		else if (d == -3 && cPos.z > 50)
 			cPos.z -= 0.3;
-	}
-
-	/*
-	 * On Mouse Down
-	*/
-	function	mousedown(event) {
-		event.preventDefault();
-		mouseDown = true;
-		mouseX = event.clientX;
-		mouseY = event.clientY;
-	}
-
-	/*
-	 * On Mouse Move
-	*/
-	function	mousemove(event) {
-		if (!mouseDown)
-			return;
-		event.preventDefault();
-		var deltaX = event.clientX - mouseX,
-		deltaY = event.clientY - mouseY;
-		mouseX = event.clientX;
-		mouseY = event.clientY;
-		camera.rotation.y += deltaX / 100;
-		camera.rotation.x += deltaY / 100;
-	}
-
-	/*
-	 * On Mouse Up
-	*/
-	function	mouseup(event) {
-		event.preventDefault();
-		mouseDown = false;
 	}
