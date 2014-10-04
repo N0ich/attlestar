@@ -24,7 +24,9 @@
 	<script src='js/lib/js/loaders/MTLLoader.js'></script>
 	<script src='js/lib/js/loaders/OBJMTLLoader.js'></script>
 	<script src="js/lib/threex.spaceships.js"></script>
-	 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<script src="js/console.js"></script>
+	<script src="js/attlestar/Attlestar.js"></script>
+	<script src="js/attlestar/Ship.js"></script>
 	<script src="js/attlestar.js"></script>
 </html>

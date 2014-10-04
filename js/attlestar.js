@@ -7,11 +7,11 @@
  * Events
 */
 	// MouseWheel
-		document.getElementById('main').addEventListener('mousewheel', mousewheel, false);
-		document.getElementById('main').addEventListener('DOMMouseScroll', mousewheel, false);
+		//document.getElementById('main').addEventListener('mousewheel', mousewheel, false);
+		//document.getElementById('main').addEventListener('DOMMouseScroll', mousewheel, false);
 	// MouseDown
-		document.getElementById('main').addEventListener('mousedown', mousedown, false);
-		document.getElementById('main').addEventListener('DOMMouseDown', mousedown, false);
+		//document.getElementById('main').addEventListener('mousedown', mousedown, false);
+		//document.getElementById('main').addEventListener('DOMMouseDown', mousedown, false);
 	//// MouseUp
 		//document.getElementById('main').addEventListener('mouseup', mouseup, false);
 		//document.getElementById('main').addEventListener('DOMMouseUp', mouseup, false);
@@ -19,249 +19,108 @@
 		//document.getElementById('main').addEventListener('mousemove', mousemove, false);
 		/*document.getElementById('main').addEventListener('DOMMouseMove', mousemove, false);*/
 
+		function	animate() {
+			requestAnimationFrame(animate);
+			Attlestar.mesh.rotation.x += .00001;
+			Attlestar.mesh.rotation.y += .0001;
+			Attlestar.renderer.render(Attlestar.scene, Attlestar.camera);
+		}
 
-/*
- * Base Settings
-*/
-	// Globals
-		var inclinaison = -0.15;
-		var grid_height = 100;
-		var grid_width = 150;
-		var density = 10;
-		var baseUrl = "js/";
-		var renderer, scene, camera, fov, mesh, projector,
-			mouseX = 0, mouseY = 0, mouseDown = false;
-		var ship_left = 4.5;
-		var ship_bottom = 6.2;
-		var ship_right = 7.8;
-		var ship_top = 9.4;
-		var g_ship = [];
-		var g_ship_click = [];
-		var g_ship_move = [{}, {}];
-		var g_ship_i = 0;
-		var g_ship_move_i = 0;
-		var go = false;
-		var bound = 0;
-		var debug = 1;
+		Attlestar = new Attlestar();
 
-
-	launchGame();
-
-	function	launchGame() {
-		if (debug == 1)
-			send("Initialize WebGl...");
-		initGame();
-		if (debug == 1)
-			send("Add camera...");
-		addCamera(60, window.innerWidth / window.innerHeight, 1, 10000);
-		if (debug == 1)
-			send("Add World...");
-		addWorld();
-		if (debug == 1)
-			send("Add Ship...");
-		addSheep(1, 15, 10, -5, ship_top);
-		addSheep(2, 5, 5, -5, ship_left);
-		if (debug == 1)
-			send("Add Grid...");
-		addLines();
-		if (debug == 1)
-			send("Add projector..");
-		projector = new THREE.Projector();
+		Attlestar.setDebug(1);
+		Attlestar.initialize(document.getElementById('main'));
+		Attlestar.baseUrl = 'js/';
+		Attlestar.addCamera(60, (window.innerWidth / window.innerHeight), 1, 10000);
+		Attlestar.addWorld();
+		Attlestar.addShip(1, 15, 10, -5, Attlestar.orientation.top, 0);
+		Attlestar.addShip(3, 5, 5, -5, Attlestar.orientation.left, 0);
+		Attlestar.grid_width = 150;
+		Attlestar.grid_height = 100;
+		Attlestar.density = 10;
+		Attlestar.addGrid();
 		animate();
-	}
 
-	/*
-	 * Initialize the WebGL and the scene
-	*/
-	function	initGame() {
-		renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false});
-		renderer.setSize(window.innerWidth, window.innerHeight);
-		document.body.appendChild(renderer.domElement);
-		scene = new THREE.Scene();
-	}
+	//function	move(i, x, y) {
+		//var actX = g_ship[i].position.x,
+			//actY = g_ship[i].position.y,
+			//futureZ = 0;
 
-	/*
-	 * Render the scene
-	*/
-	function	render() {
-		renderer.render(scene, camera);
-	}
-
-	/*
-	 * Move a ship
-	*/
-	function	move(i, x, y) {
-		var actX = g_ship[i].position.x,
-			actY = g_ship[i].position.y,
-			futureZ = 0;
-
-		if (x > actX)
-			futureZ = ship_right;
-		else if (x < actX)
-			futureZ = ship_left;
-		if (y < actY)
-			futureZ = (futureZ + ship_bottom) / 2;
-		else if (y > actY)
-			futureZ = (futureZ + ship_top) / 2;
-		g_ship_move[i]["go"] = 1;
-		g_ship_move[i]["x"] = x;
-		g_ship_move[i]["y"] = y;
-		g_ship_move[i]["z"] = futureZ;
-		g_ship_move_i += 1;
-	}
+		//if (x > actX)
+			//futureZ = ship_right;
+		//else if (x < actX)
+			//futureZ = ship_left;
+		//if (y < actY)
+			//futureZ = (futureZ + ship_bottom) / 2;
+		//else if (y > actY)
+			//futureZ = (futureZ + ship_top) / 2;
+		//g_ship_move[i]["go"] = 1;
+		//g_ship_move[i]["x"] = x;
+		//g_ship_move[i]["y"] = y;
+		//g_ship_move[i]["z"] = futureZ;
+		//g_ship_move_i += 1;
+	//}
 	/*
 	 * Animate the scene
 	*/
-	function	animate() {
-		var i;
-		requestAnimationFrame(animate);
-		ship_move();
-		mesh.rotation.x += 0.00001;
-		mesh.rotation.y += 0.0001;
-		renderer.render(scene, camera);
-	}
+	//function	animate() {
+		//var i;
+		//requestAnimationFrame(animate);
+		//ship_move();
+		//mesh.rotation.x += 0.00001;
+		//mesh.rotation.y += 0.0001;
+		//renderer.render(scene, camera);
+	//}
 
 	/*
 	 * Making Ship Move
 	*/
-	function	ship_move() {
-		for (i = 0; i < g_ship_i; i += 1) {
-			if (g_ship_move[i]["go"] == 1) {
-				ship = g_ship[i];
-				shipc = g_ship_click[i];
+	//function	ship_move() {
+		//for (i = 0; i < g_ship_i; i += 1) {
+			//if (g_ship_move[i]["go"] == 1) {
+				//ship = g_ship[i];
+				//shipc = g_ship_click[i];
 
-				x = g_ship_move[i]["x"];
-				y = g_ship_move[i]["y"];
-				z = g_ship_move[i]["z"];
-				if (ship.position.x == x && ship.position.y == y) {
-					g_ship_move[i]["go"] = 0;
-					g_ship_move_i -= 1;
-				}
-				if (ship.rotation.y > z)
-					zInc = 0.05;
-				else
-					zInc = -0.05;
-				if (ship.position.x > x)
-					xInc = 0.5;
-				else
-					xInc = -0.5;
-				if (ship.position.y > y)
-					yInc = 0.5;
-				else
-					yInc = -0.5;
-				if (ship.position.x != x) {
-					ship.position.x = ship.position.x - xInc;
-					shipc.position.x = shipc.position.x - xInc;
-				} if (ship.position.y != y) {
-					ship.position.y = ship.position.y - yInc;
-					shipc.position.y = shipc.position.y - yInc;
-				} if (ship.rotation.y != z) {
-					ship.rotation.y = (ship.rotation.y - zInc);
-					ship.rotation.y = ship.rotation.y.toFixed(2);
-				}
-			}
-		}
-	}
-
-	/*
-	 * Add camera to the scene
-	*/
-	function	addCamera(fov, aspect, near, far) {
-		camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-		camera.position.set(0, 0, 1000);
-		camera.position.x = 0;
-		camera.position.y = 0;
-		camera.position.z = 100;
-		scene.add(camera);
-	}
+				//x = g_ship_move[i]["x"];
+				//y = g_ship_move[i]["y"];
+				//z = g_ship_move[i]["z"];
+				//if (ship.position.x == x && ship.position.y == y) {
+					//g_ship_move[i]["go"] = 0;
+					//g_ship_move_i -= 1;
+				//}
+				//if (ship.rotation.y > z)
+					//zInc = 0.05;
+				//else
+					//zInc = -0.05;
+				//if (ship.position.x > x)
+					//xInc = 0.5;
+				//else
+					//xInc = -0.5;
+				//if (ship.position.y > y)
+					//yInc = 0.5;
+				//else
+					//yInc = -0.5;
+				//if (ship.position.x != x) {
+					//ship.position.x = ship.position.x - xInc;
+					//shipc.position.x = shipc.position.x - xInc;
+				//} if (ship.position.y != y) {
+					//ship.position.y = ship.position.y - yInc;
+					//shipc.position.y = shipc.position.y - yInc;
+				//} if (ship.rotation.y != z) {
+					//ship.rotation.y = (ship.rotation.y - zInc);
+					//ship.rotation.y = ship.rotation.y.toFixed(2);
+				//}
+			//}
+		//}
+	//}
 
 	/*
-	 * Add a world sphere
+	 * Event on click Ship
 	*/
-	function	addWorld() {
-		var geometry = new THREE.SphereGeometry(200, 32, 32);
-		var worldtexture = THREE.ImageUtils.loadTexture('js/img/star.png')
-		var material = new THREE.MeshBasicMaterial({ 
-			map: worldtexture,
-			side: THREE.DoubleSide
-		});
-		mesh = new THREE.Mesh(geometry, material);
-		scene.add(mesh);
-	}
-
-	/*
-	 * Add a Ship
-	*/
-	function	addSheep(ship, pos_y, pos_x, rot_x, way) {
-		var loader	= new THREE.OBJMTLLoader();
-		var objUrl	= baseUrl + 'models/SpaceFighter0'+ ship +'/SpaceFighter0'+ ship +'.obj';
-		var mtlUrl	= baseUrl + 'models/SpaceFighter0'+ ship +'/SpaceFighter0'+ ship +'.mtl';
-		var return_o;
-		loader.load(objUrl, mtlUrl, function( object3d ){
-			object3d.scale.multiplyScalar(1/50)
-			object3d.traverse(function(object3d){
-				if( object3d.material ){
-					object3d.material.emissive.set('white')
-				}
-			})
-			// Visible Ship
-				object3d.position.y = pos_y;
-				object3d.position.x = pos_x;
-				object3d.position.z = 2;
-				object3d.rotation.x = rot_x;
-				object3d.rotation.y = way;
-				scene.add(object3d);
-			// Invisible Box (click)
-				object = new THREE.Mesh(new THREE.BoxGeometry(10, 10, 10),
-					new THREE.MeshBasicMaterial({color: 0xffffff, transparent: true, opacity: 0.01}));
-				object.position.y = pos_y;
-				object.position.x = pos_x;
-				object.position.z = 2;
-				scene.add(object);
-
-			g_ship.push(object3d);
-			g_ship_click.push(object);
-			send("Add ship " + g_ship_i);
-			g_ship_i += 1;
-		});
-		return return_o;
-	}
-
-	/*
-	 * Add the lights to the scene
-	*/
-	function	addLight() {
-		var lumiere = new THREE.DirectionalLight(0xffffff, 1.0);
-		lumiere.position.set(0, 0, 400);
-		scene.add(lumiere);
-	}
-
-	function	addLines() {
-		base = grid_width / 2;
-		var material = new THREE.LineBasicMaterial({
-			color: 0xffffff,
-			transparent: true,
-			opacity: 0.07
-		});
-		var i;
-		// Vertical lines
-			for (i = -(grid_height / 2); i < (base - 20); i += density) {
-				var geometry = new THREE.Geometry();
-				geometry.vertices.push(new THREE.Vector3(-(base), (i), 1));
-				geometry.vertices.push(new THREE.Vector3(base, (i), 1));
-				var line = new THREE.Line(geometry, material);
-				scene.add(line);
-			}
-		// Horizontal lines
-			for (i = -(grid_width / 2); i < (grid_width - 70); i += density) {
-				var geometry = new THREE.Geometry();
-				geometry.vertices.push(new THREE.Vector3(i, -(grid_width / 2) + 25, 1));
-				geometry.vertices.push(new THREE.Vector3(i, (grid_width / 2) - 25, 1));
-				var line = new THREE.Line(geometry, material);
-				scene.add(line);
-			}
-
-	}
+	//function	click(ship) {
+		//if (debug == 1)
+			//send("Ship " + ship + " clicked");
+	//}
 
 /*
  * Events
@@ -270,31 +129,30 @@
 	/*
 	 * On Mouse Wheel (Scroll)
 	*/
-	function	mousewheel(e) {
-		var d = ((typeof e.wheelDelta != "undefined")?(-e.wheelDelta):e.detail);
-		var cPos = camera.position;
-		if (d == 3 && cPos.z < 200)
-			cPos.z += 0.3;
-		else if (d == -3 && cPos.z > 50)
-			cPos.z -= 0.3;
-	}
+	//function	mousewheel(e) {
+		//var d = ((typeof e.wheelDelta != "undefined")?(-e.wheelDelta):e.detail);
+		//var cPos = camera.position;
+		//if (d == 3 && cPos.z < 200)
+			//cPos.z += 0.3;
+		//else if (d == -3 && cPos.z > 50)
+			//cPos.z -= 0.3;
+	//}
 
 	/*
 	 * On Mouse Down (Click)
 	*/
-	function	mousedown(event) {
-		event.preventDefault();
-		var vector = new THREE.Vector3( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1, 0.5 );
-		projector.unprojectVector( vector, camera );
-		var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-		var intersects = raycaster.intersectObjects(g_ship_click);
-		send(intersects.length);
-		if ( intersects.length > 0 ) {
-			for (i = 0; i < g_ship_i; i++) {
-				if (g_ship[i].position.x == intersects[0].object.position.x &&
-						g_ship[i].position.y == intersects[0].object.position.y) {
-					send("Ship " + i + " clicked");
-				}
-			}
-		}
-	}
+	//function	mousedown(event) {
+		//event.preventDefault();
+		//var vector = new THREE.Vector3( ( event.clientX / window.innerWidth ) * 2 - 1, - ( event.clientY / window.innerHeight ) * 2 + 1, 0.5 );
+		//projector.unprojectVector( vector, camera );
+		//var raycaster = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+		//var intersects = raycaster.intersectObjects(g_ship_click);
+		//if ( intersects.length > 0 ) {
+			//for (i = 0; i < g_ship_i; i++) {
+				//if (g_ship[i].position.x == intersects[0].object.position.x &&
+						//g_ship[i].position.y == intersects[0].object.position.y) {
+					//click(i);
+				//}
+			//}
+		//}
+	/*}*/
